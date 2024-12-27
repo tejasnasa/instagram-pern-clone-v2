@@ -3,6 +3,7 @@ import axios from "axios";
 import Post from "../components/Post";
 import People from "../components/People";
 import Loading from "../components/Loading";
+import Stories from "../components/Stories";
 
 const HomePage: React.FC = () => {
   const [posts, setPosts] = useState<any[]>([]);
@@ -48,13 +49,17 @@ const HomePage: React.FC = () => {
 
   return (
     <main className="bg-black text-white pl-80 pr-52 flex">
-      <section className="flex flex-wrap flex-col items-center justify-center mt-5">
-        {Array.isArray(posts) && posts.length > 0 ? (
-          posts.map((post) => <Post key={post.id} post={post} />)
-        ) : (
-          <p>No posts available.</p>
-        )}
-      </section>
+      <div className="flex flex-col">
+        <Stories />
+        <section className="flex flex-wrap flex-col items-center justify-center mt-5">
+          {Array.isArray(posts) && posts.length > 0 ? (
+            posts.map((post) => <Post key={post.id} post={post} />)
+          ) : (
+            <p>No posts available.</p>
+          )}
+        </section>
+      </div>
+
       <People />
     </main>
   );
