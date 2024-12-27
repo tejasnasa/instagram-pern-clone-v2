@@ -1,12 +1,18 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Loading from "./Loading";
+import { Link } from "react-router-dom";
 
 interface Story {
-  avatar: string;
-  fullname: string;
-  username: string;
   id: string;
+  imageurl: string;
+  created_at: string;
+  user: {
+    avatar: string;
+    fullname: string;
+    username: string;
+    id: string;
+  };
 }
 
 const Stories = () => {
@@ -53,15 +59,11 @@ const Stories = () => {
 
   return (
     <main className="bg-black text-white flex">
-      geehhelorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint,
-      non! Aliquam excepturi iure neque. Maiores officiis ducimus illo ipsam
-      praesentium libero, impedit culpa id aperiam, totam autem laboriosam
-      dolorem est!
       {stories.map((story) => (
-        <div>
-          <h3>{story.avatar}</h3>
-          <h3>{story.username}</h3>
-        </div>
+        <Link to={`/story/${story.id}`} className="">
+          <img src={story.user.avatar} className="h-16 rounded-full" />
+          <h3 className="text-sm">{story.user.username}</h3>
+        </Link>
       ))}
     </main>
   );

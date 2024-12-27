@@ -13,6 +13,7 @@ interface UserProfile {
   avatar: string;
   bio: string;
   posts: Array<any>;
+  private: true;
   followers: Array<{ id: string }>;
   following: Array<{ id: string }>;
 }
@@ -121,6 +122,8 @@ const ProfilePage: React.FC = () => {
 
   const isSelf = loggedInUserId === userProfile.id;
 
+  const isPrivate = !isSelf && !isFollowing && userProfile.private === true;
+
   return (
     <main className="bg-black text-white pl-80 pr-48 min-h-dvh w-dvw">
       <section className="flex ml-12">
@@ -163,39 +166,57 @@ const ProfilePage: React.FC = () => {
       <hr className="h-[0.5px] bg-gray-200 border-0 dark:bg-gray-700" />
       <br />
       <br />
-      <section>
-        <div className="grid grid-cols-3 gap-1">
-          {userProfile.posts.length > 0 ? (
-            userProfile.posts.map((post) => (
-              <Link
-                key={post.id}
-                to={`/post/${post.id}`}
-                className="relative aspect-square bg-black overflow-hidden"
-              >
-                <img
-                  src={post.imageurl[0]}
-                  alt=""
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center text-white opacity-0 hover:opacity-100 transition-opacity">
-                  <div className="flex">
-                    <span className="flex items-center text-xl font-bold m-4">
-                      <FaHeart />
-                      &nbsp;{post.likes.length}
-                    </span>
-                    <span className="flex items-center text-xl font-bold m-4">
-                      <BiSolidMessageRounded />
-                      &nbsp;{post.comments.length}
-                    </span>
+
+      {isPrivate && (
+        <section className="flex flex-col">
+          <h2>This account is private</h2>
+          <h3> Follow to see their photos and videos</h3>
+          <button
+            onClick={handleFollowToggle}
+            className={`${
+              isFollowing ? "bg-gray-400" : "bg-[#1877F2]"
+            } pt-1 pb-1 pr-5 pl-5 mr-5 rounded-lg text-center justify-center`}
+          >
+            Follow
+          </button>
+        </section>
+      )}
+
+      {!isPrivate && (
+        <section>
+          <div className="grid grid-cols-3 gap-1">
+            {userProfile.posts.length > 0 ? (
+              userProfile.posts.map((post) => (
+                <Link
+                  key={post.id}
+                  to={`/post/${post.id}`}
+                  className="relative aspect-square bg-black overflow-hidden"
+                >
+                  <img
+                    src={post.imageurl[0]}
+                    alt=""
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center text-white opacity-0 hover:opacity-100 transition-opacity">
+                    <div className="flex">
+                      <span className="flex items-center text-xl font-bold m-4">
+                        <FaHeart />
+                        &nbsp;{post.likes.length}
+                      </span>
+                      <span className="flex items-center text-xl font-bold m-4">
+                        <BiSolidMessageRounded />
+                        &nbsp;{post.comments.length}
+                      </span>
+                    </div>
                   </div>
-                </div>
-              </Link>
-            ))
-          ) : (
-            <p>No posts found</p>
-          )}
-        </div>
-      </section>
+                </Link>
+              ))
+            ) : (
+              <p>No posts found</p>
+            )}
+          </div>
+        </section>
+      )}
     </main>
   );
 };

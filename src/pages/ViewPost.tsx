@@ -7,7 +7,7 @@ import Loading from "../components/Loading";
 interface Post {
   id: string;
   caption: string;
-  imageurl: string;
+  imageurl: string[];
   user: {
     username: string;
     avatar: string;

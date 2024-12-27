@@ -18,11 +18,14 @@ import NotFoundPage from "./pages/NotFound";
 import Header from "./components/Header";
 import Explore from "./pages/Explore";
 import Search from "./pages/Search";
+import ViewStories from "./pages/ViewStories";
+import CreateChoice from "./pages/CreateChoice";
+import CreateStory from "./pages/CreateStory";
 
 const App: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [darkMode, setDarkMode] = useState(true);
+  const [isDarkMode, setIsDarkMode] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
@@ -30,8 +33,21 @@ const App: React.FC = () => {
     setTimeout(() => setIsLoading(false), 800);
   }, []);
 
-  const changeTheme = () => {
-    setDarkMode((prevTheme) => !prevTheme);
+  useEffect(() => {
+    const theme = localStorage.getItem("darkMode");
+    if (theme === null) {
+      localStorage.setItem("darkMode", "false");
+    } else {
+      setIsDarkMode(theme === "true");
+    }
+  });
+
+  const handleThemeSwitch = () => {
+    setIsDarkMode((prev) => {
+      const newTheme = !prev;
+      localStorage.setItem("darkMode", `${newTheme}`);
+      return newTheme;
+    });
   };
 
   const handleLogout = () => {
@@ -45,7 +61,7 @@ const App: React.FC = () => {
     return (
       isAuthenticated &&
       !noNavbarRoutes.includes(location.pathname) && (
-        <Navbar handleLogout={handleLogout} handleTheme={changeTheme} />
+        <Navbar handleLogout={handleLogout} handleTheme={handleThemeSwitch} />
       )
     );
   };
@@ -64,7 +80,7 @@ const App: React.FC = () => {
 
   return (
     <Router>
-      <main className="flex">
+      <main className={`flex ${isDarkMode ? "dark" : undefined}`}>
         {isLoading ? (
           <LoadingScreen />
         ) : (
@@ -124,6 +140,22 @@ const App: React.FC = () => {
                 path="/create"
                 element={
                   <ProtectedRoute>
+                    <CreateChoice />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/create/story"
+                element={
+                  <ProtectedRoute>
+                    <CreateStory />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/create/post"
+                element={
+                  <ProtectedRoute>
                     <CreatePost />
                   </ProtectedRoute>
                 }
@@ -133,6 +165,14 @@ const App: React.FC = () => {
                 element={
                   <ProtectedRoute>
                     <ProfilePage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/story/:storyid"
+                element={
+                  <ProtectedRoute>
+                    <ViewStories />
                   </ProtectedRoute>
                 }
               />

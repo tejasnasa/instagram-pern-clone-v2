@@ -48,7 +48,7 @@ const HomePage: React.FC = () => {
   }
 
   return (
-    <main className="bg-black text-white pl-80 pr-52 flex">
+    <main className="dark:bg-black bg-white dark:text-white text-black pl-80 pr-52 flex">
       <div className="flex flex-col">
         <Stories />
         <section className="flex flex-wrap flex-col items-center justify-center mt-5">
