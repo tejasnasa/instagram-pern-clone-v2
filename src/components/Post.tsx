@@ -51,11 +51,11 @@ const Post: React.FC<PostProps> = ({ post }) => {
   useEffect(() => {
     if (loggedInUserId) {
       setIsLiked(
-        post.likes.some((like: any) => like.userid === loggedInUserId)
+        post.likes.some((like: any) => like.user.id === loggedInUserId)
       );
       setIsBookmarked(
         post.bookmarks.some(
-          (bookmark: any) => bookmark.userid === loggedInUserId
+          (bookmark: any) => bookmark.user.id === loggedInUserId
         )
       );
     }
@@ -100,8 +100,6 @@ const Post: React.FC<PostProps> = ({ post }) => {
 
   const handleBookmarkToggle = async () => {
     try {
-      setIsBookmarked(!isBookmarked);
-
       if (isBookmarked) {
         await axios.delete(
           `${import.meta.env.VITE_BASE_URL}/v1/bookmarks/post/${post.id}`,
@@ -122,6 +120,7 @@ const Post: React.FC<PostProps> = ({ post }) => {
           }
         );
       }
+      setIsBookmarked(!isBookmarked);
     } catch (err) {
       console.error("Error toggling bookmark:", err);
     }
@@ -161,6 +160,11 @@ const Post: React.FC<PostProps> = ({ post }) => {
           <Link to={`/post/${post.id}`}>
             <FaRegComment size={25} className="ml-4" />
           </Link>
+          {isBookmarked ? (
+            <button onClick={handleBookmarkToggle}>Unnookmark</button>
+          ) : (
+            <button onClick={handleBookmarkToggle}>Bookmark</button>
+          )}
         </span>
         <p className="font-semibold mt-1">{likesCount} likes</p>{" "}
         <p className="mb-1 mt-1 text-sm">

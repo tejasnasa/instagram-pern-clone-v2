@@ -12,9 +12,7 @@ interface CommentsProps {
       id: string;
       avatar: string;
     };
-    _count: {
-      likes: number;
-    };
+    likes: any[];
   }[];
   postid: string;
   refreshPost: () => void;
@@ -72,7 +70,7 @@ const Comments = ({
           <img src={comment.user.avatar} className="h-10 rounded-full" />
           <h1>{comment.user.username}</h1>
           <p>{comment.text}</p>
-          <p>{comment._count.likes}</p>
+          <p>{comment.likes.length}</p>
         </div>
       ))}
       <form onSubmit={handleComment}>
