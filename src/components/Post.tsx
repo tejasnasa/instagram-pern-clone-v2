@@ -16,11 +16,13 @@ interface PostProps {
       id: string;
     };
     likes: any[];
+    bookmarks: any[];
   };
 }
 
 const Post: React.FC<PostProps> = ({ post }) => {
   const [isLiked, setIsLiked] = useState(false);
+  const [isBookmarked, setIsBookmarked] = useState(false);
   const [loggedInUserId, setLoggedInUserId] = useState<string | null>(null);
   const [likesCount, setLikesCount] = useState(post.likes.length);
 
@@ -51,8 +53,13 @@ const Post: React.FC<PostProps> = ({ post }) => {
       setIsLiked(
         post.likes.some((like: any) => like.userid === loggedInUserId)
       );
+      setIsBookmarked(
+        post.bookmarks.some(
+          (bookmark: any) => bookmark.userid === loggedInUserId
+        )
+      );
     }
-  }, [loggedInUserId, post.likes]);
+  }, [loggedInUserId, post.likes, post.bookmarks]);
 
   const handleLikeToggle = async () => {
     try {
@@ -91,6 +98,37 @@ const Post: React.FC<PostProps> = ({ post }) => {
     }
   };
 
+  const handleBookmarkToggle = async () => {
+    try {
+      setIsBookmarked(!isBookmarked);
+
+      if (isBookmarked) {
+        await axios.delete(
+          `${import.meta.env.VITE_BASE_URL}/v1/bookmarks/post/${post.id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
+          }
+        );
+      } else {
+        await axios.post(
+          `${import.meta.env.VITE_BASE_URL}/v1/bookmarks/post/${post.id}`,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
+          }
+        );
+      }
+    } catch (err) {
+      console.error("Error toggling bookmark:", err);
+    }
+  };
+
+  let i = 1;
+
   return (
     <div key={post.id} className="w-8/12 mr-5 ml-5 mb-5 mt-1">
       <Link to={`/profile/${post.user.id}`}>
@@ -102,7 +140,7 @@ const Post: React.FC<PostProps> = ({ post }) => {
       </Link>
 
       {post.imageurl.map((url) => (
-        <img src={url} alt="Post" className="max-h-[600px] m-auto" />
+        <img src={url} key={i++} alt="Post" className="max-h-[600px] m-auto" />
       ))}
 
       <div className="pt-4">

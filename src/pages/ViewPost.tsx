@@ -3,6 +3,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import Post from "../components/Post";
 import Loading from "../components/Loading";
+import Comments from "../components/Comments";
 
 interface Post {
   id: string;
@@ -16,29 +17,36 @@ interface Post {
   };
   userid: string;
   likes: any[];
+  comments: any[];
+  bookmarks: any[];
 }
 
 const PostDetails: React.FC = () => {
   const { postid } = useParams<{ postid: string }>();
   const [post, setPost] = useState<Post | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const fetchPostDetails = async () => {
+    setIsLoading(true);
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_URL}/v1/posts/details/${postid}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      );
+      const postData = response.data.responseObject;
+      setPost(postData);
+    } catch (err) {
+      console.error("Error fetching post details:", err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchPostDetails = async () => {
-      try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_BASE_URL}/v1/posts/details/${postid}`,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-            },
-          }
-        );
-        const postData = response.data.responseObject;
-        setPost(postData);
-      } catch (err) {
-        console.error("Error fetching post details:", err);
-      }
-    };
     fetchPostDetails();
   }, [postid]);
 
@@ -48,13 +56,18 @@ const PostDetails: React.FC = () => {
     }
   }, [post]);
 
-  if (!post) {
+  if (!post || isLoading) {
     return <Loading />;
   }
 
   return (
-    <main className="bg-black text-white pl-96 pr-32 min-h-dvh w-dvw">
+    <main className="bg-black text-white pl-64 pr-32 min-h-dvh w-dvw flex">
       <Post key={post.id} post={post} />
+      <Comments
+        comments={post.comments}
+        postid={post.id}
+        refreshPost={fetchPostDetails}
+      />
     </main>
   );
 };
