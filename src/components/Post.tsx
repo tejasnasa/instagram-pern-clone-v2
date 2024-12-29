@@ -65,9 +65,8 @@ const Post: React.FC<PostProps> = ({ post }) => {
       setIsLiked(!isLiked);
 
       if (isLiked) {
-        await axios.post(
-          `${import.meta.env.VITE_BASE_URL}/v1/like/unlike/${post.id}`,
-          {},
+        await axios.delete(
+          `${import.meta.env.VITE_BASE_URL}/v1/like/post/${post.id}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -76,7 +75,7 @@ const Post: React.FC<PostProps> = ({ post }) => {
         );
       } else {
         await axios.post(
-          `${import.meta.env.VITE_BASE_URL}/v1/like/${post.id}`,
+          `${import.meta.env.VITE_BASE_URL}/v1/like/post/${post.id}`,
           {},
           {
             headers: {
@@ -101,7 +100,7 @@ const Post: React.FC<PostProps> = ({ post }) => {
         />
         <span className="pb-2 text-sm font-semibold">{post.user.username}</span>
       </Link>
-      
+
       {post.imageurl.map((url) => (
         <img src={url} alt="Post" className="max-h-[600px] m-auto" />
       ))}

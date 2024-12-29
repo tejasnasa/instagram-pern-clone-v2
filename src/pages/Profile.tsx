@@ -146,6 +146,22 @@ const ProfilePage: React.FC = () => {
                 {isFollowing ? "Unfollow" : "Follow"}
               </button>
             )}
+            {isSelf && (
+              <div>
+                <Link
+                  to={"/settings"}
+                  className="bg-[#363636] pt-2 pb-2 pr-4 pl-4 mr-2 rounded-lg text-center text-sm font-semibold justify-center"
+                >
+                  Edit Profile
+                </Link>
+                <Link
+                  to={"/activity"}
+                  className="bg-[#363636] pt-2 pb-2 pr-4 pl-4 mr-4 rounded-lg text-center text-sm font-semibold justify-center"
+                >
+                  View archive
+                </Link>
+              </div>
+            )}
             <SlOptions />
           </div>
           <div className="mb-6">

@@ -12,8 +12,13 @@ const LoginPage: React.FC<LoginPageProps> = ({ setAuth }) => {
     usernameOrEmail: "",
     password: "",
   });
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [errors, setErrors] = useState({});
+
+  const handlePasswordToggle = () => {
+    setShowPassword(!showPassword);
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -72,13 +77,19 @@ const LoginPage: React.FC<LoginPageProps> = ({ setAuth }) => {
               className="bg-black border-gray-500 border-2 p-2 w-80 text-sm m-1"
             />
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               name="password"
               placeholder="Password"
               value={formData.password}
               onChange={handleChange}
               className="bg-black border-gray-500 border-2 p-2 w-80 text-sm m-1"
             />
+            <span
+              className="flex justify-around items-center absolute mr-10"
+              onClick={handlePasswordToggle}
+            >
+              SHOW
+            </span>
             <button
               type="submit"
               className="w-80 p-auto text-center bg-blue-600 m-1 rounded-md p-1 align-middle"
@@ -88,7 +99,8 @@ const LoginPage: React.FC<LoginPageProps> = ({ setAuth }) => {
           </form>
           <div className="h-[20px] m-1 p-2">
             {error && (
-              <span className="w-80 text-sm"
+              <span
+                className="w-80 text-sm"
                 style={{
                   color: "red",
                   width: "320px",

@@ -21,6 +21,8 @@ import Search from "./pages/Search";
 import ViewStories from "./pages/ViewStories";
 import CreateChoice from "./pages/CreateChoice";
 import CreateStory from "./pages/CreateStory";
+import Settings from "./pages/Settings";
+import Activity from "./pages/Activity";
 
 const App: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
@@ -173,6 +175,22 @@ const App: React.FC = () => {
                 element={
                   <ProtectedRoute>
                     <ViewStories />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/settings"
+                element={
+                  <ProtectedRoute>
+                    <Settings />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/activity"
+                element={
+                  <ProtectedRoute>
+                    <Activity />
                   </ProtectedRoute>
                 }
               />
