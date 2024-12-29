@@ -18,14 +18,13 @@ interface CommentsProps {
 }
 
 const Comments = ({
-  comments: initialComments,
+  comments,
   postid,
   refreshPost,
 }: CommentsProps) => {
   const [formData, setFormData] = useState({
     text: "",
   });
-  const [comments, setComments] = useState(initialComments);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
