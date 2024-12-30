@@ -56,7 +56,7 @@ const People: React.FC = () => {
   );
 
   return (
-    <div>
+    <div className="fixed end-40 hidden lg:block">
       <div>
         {loggedInUser?.avatar && (
           <Link

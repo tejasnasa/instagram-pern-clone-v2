@@ -53,7 +53,7 @@ const Search: React.FC = () => {
         placeholder="Search..."
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        className="ml-48 h-20 w-48 rounded bg-white"
+        className="ml-48 h-10 w-48 rounded bg-white"
       />
       {loading && <p>Loading...</p>}
       <div className="ml-48 text-white">

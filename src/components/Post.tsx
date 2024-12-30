@@ -3,6 +3,10 @@ import { Link } from "react-router-dom";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { FaRegComment } from "react-icons/fa6";
 import axios from "axios";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from "react-responsive-carousel";
+import { FaRegBookmark } from "react-icons/fa";
+import { FaBookmark } from "react-icons/fa";
 
 interface PostProps {
   post: {
@@ -129,7 +133,7 @@ const Post: React.FC<PostProps> = ({ post }) => {
   let i = 1;
 
   return (
-    <div key={post.id} className="w-8/12 mr-5 ml-5 mb-5 mt-1">
+    <div key={post.id} className="mb-5 mt-1">
       <Link to={`/profile/${post.user.id}`}>
         <img
           src={post.user.avatar}
@@ -137,35 +141,54 @@ const Post: React.FC<PostProps> = ({ post }) => {
         />
         <span className="pb-2 text-sm font-semibold">{post.user.username}</span>
       </Link>
-
-      {post.imageurl.map((url) => (
-        <img src={url} key={i++} alt="Post" className="max-h-[600px] m-auto" />
-      ))}
-
+      <Carousel showThumbs={false} showStatus={false}>
+        {post.imageurl.map((url) => (
+          <div className="flex">
+            <img
+              src={url}
+              key={i++}
+              alt="Post"
+              className="max-h-[600px] mt-auto mb-auto"
+            />
+          </div>
+        ))}
+      </Carousel>
       <div className="pt-4">
-        <span className="flex">
-          {isLiked ? (
-            <FaHeart
-              size={25}
-              onClick={handleLikeToggle}
-              className="text-[#FF3040] cursor-pointer"
-            />
-          ) : (
-            <FaRegHeart
-              size={25}
-              onClick={handleLikeToggle}
-              className="text-white cursor-pointer"
-            />
-          )}
-          <Link to={`/post/${post.id}`}>
-            <FaRegComment size={25} className="ml-4" />
-          </Link>
-          {isBookmarked ? (
-            <button onClick={handleBookmarkToggle}>Unnookmark</button>
-          ) : (
-            <button onClick={handleBookmarkToggle}>Bookmark</button>
-          )}
-        </span>
+        <div className="flex justify-between">
+          <span className="flex">
+            {isLiked ? (
+              <FaHeart
+                size={25}
+                onClick={handleLikeToggle}
+                className="text-[#FF3040] cursor-pointer"
+              />
+            ) : (
+              <FaRegHeart
+                size={25}
+                onClick={handleLikeToggle}
+                className="text-white cursor-pointer"
+              />
+            )}
+            <Link to={`/post/${post.id}`}>
+              <FaRegComment size={25} className="ml-4" />
+            </Link>
+          </span>
+          <span>
+            {isBookmarked ? (
+              <FaBookmark
+                size={21}
+                onClick={handleBookmarkToggle}
+                className="ml-4 mt-[2px]"
+              />
+            ) : (
+              <FaRegBookmark
+                size={21}
+                onClick={handleBookmarkToggle}
+                className="ml-4 mt-[2px]"
+              />
+            )}
+          </span>
+        </div>
         <p className="font-semibold mt-1">{likesCount} likes</p>{" "}
         <p className="mb-1 mt-1 text-sm">
           <span className="font-semibold">{post.user.username}</span>&nbsp;

@@ -47,7 +47,7 @@ const Explore: React.FC = () => {
   }
 
   return (
-    <main className="bg-black text-white pl-80 pr-52 flex">
+    <main className="dark:bg-black bg-white dark:text-white text-black flex lg:justify-center justify-end">
       <section className="flex flex-wrap flex-col items-center justify-center mt-5">
         {Array.isArray(posts) && posts.length > 0 ? (
           posts.map((post) => <Post key={post.id} post={post} />)

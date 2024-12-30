@@ -48,8 +48,8 @@ const HomePage: React.FC = () => {
   }
 
   return (
-    <main className="dark:bg-black bg-white dark:text-white text-black pl-80 pr-52 flex">
-      <div className="flex flex-col">
+    <main className="dark:bg-black bg-white dark:text-white text-black flex lg:justify-center justify-end">
+      <div className="flex flex-col lg:w-5/12 lg:mr-0 w-8/12 mr-10 lg:pr-32">
         <Stories />
         <section className="flex flex-wrap flex-col items-center justify-center mt-5">
           {Array.isArray(posts) && posts.length > 0 ? (

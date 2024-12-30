@@ -17,11 +17,7 @@ interface CommentsProps {
   refreshPost: () => void;
 }
 
-const Comments = ({
-  comments,
-  postid,
-  refreshPost,
-}: CommentsProps) => {
+const Comments = ({ comments, postid, refreshPost }: CommentsProps) => {
   const [formData, setFormData] = useState({
     text: "",
   });
