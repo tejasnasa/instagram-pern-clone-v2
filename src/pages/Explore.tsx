@@ -48,13 +48,16 @@ const Explore: React.FC = () => {
 
   return (
     <main className="dark:bg-black bg-white dark:text-white text-black flex lg:justify-center justify-end">
-      <section className="flex flex-wrap flex-col items-center justify-center mt-5">
-        {Array.isArray(posts) && posts.length > 0 ? (
-          posts.map((post) => <Post key={post.id} post={post} />)
-        ) : (
-          <p>No posts available.</p>
-        )}
-      </section>
+      <div className="flex flex-col lg:w-5/12 lg:mr-0 w-8/12 mr-10 lg:pr-32">
+        <section className="flex flex-wrap flex-col items-center justify-center mt-5">
+          {Array.isArray(posts) && posts.length > 0 ? (
+            posts.map((post) => <Post key={post.id} post={post} />)
+          ) : (
+            <p>No posts available.</p>
+          )}
+        </section>
+      </div>
+
       <People />
     </main>
   );
