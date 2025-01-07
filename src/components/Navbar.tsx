@@ -7,6 +7,7 @@ import { FiPlusSquare } from "react-icons/fi";
 import { MdHomeFilled, MdOutlineExplore } from "react-icons/md";
 import { RiMessengerLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
+import UpsideDropdown from "./DropDown";
 
 interface NavbarProps {
   handleLogout: () => void;
@@ -132,6 +133,7 @@ const Navbar: React.FC<NavbarProps> = ({ handleLogout, handleTheme }) => {
         <button onClick={handleLogout} className="block px-4 py-2">
           Logout
         </button>
+        <UpsideDropdown />
       </div>
     </div>
   );
