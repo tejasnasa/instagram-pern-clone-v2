@@ -50,7 +50,7 @@ const Search: React.FC = () => {
   }, [query]);
 
   return (
-    <div className="ml-96">
+    <main className="dark:bg-black bg-white dark:text-white text-black">
       <input
         type="text"
         placeholder="Search..."
@@ -60,7 +60,7 @@ const Search: React.FC = () => {
       />
       {loading && <p className="ml-48 text-white">Loading...</p>}
       {!loading && noResults && query && (
-        <p className="ml-48 text-white">No users found.</p>
+        <p className="ml-48 dark:text-white text-black">No users found.</p>
       )}
       <div className="ml-48 text-white">
         {results.map((result) => (
@@ -74,7 +74,7 @@ const Search: React.FC = () => {
           </div>
         ))}
       </div>
-    </div>
+    </main>
   );
 };
 

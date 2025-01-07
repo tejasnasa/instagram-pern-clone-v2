@@ -46,12 +46,17 @@ const Navbar: React.FC<NavbarProps> = ({ handleLogout, handleTheme }) => {
   }, [loggedInUser]);
 
   return (
-    <div className="pt-6 w-64 bg-black text-white flex flex-col justify-between h-lvh fixed">
+    <div className="pt-6 w-[240px] dark:bg-black bg-white dark:text-white text-black flex flex-col justify-between h-lvh fixed border-r-[1px] border-gray-300 dark:border-gray-600 border-solid">
       <div>
+        <img
+          src="/images/login2-light.png"
+          alt="instagram"
+          className="h-14 block dark:hidden"
+        />
         <img
           src="/images/login2.png"
           alt="instagram"
-          className="h-14 flex flex-col justify-between"
+          className="h-14 hidden dark:block"
         />
         <ul className="">
           <li>

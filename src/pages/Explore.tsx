@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Post from "../components/Post";
 import People from "../components/People";

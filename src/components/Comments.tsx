@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 interface CommentsProps {
   comments: {
@@ -58,11 +59,11 @@ const Comments = ({ comments, postid, refreshPost }: CommentsProps) => {
   };
 
   return (
-    <section className="">
+    <section className="bg-white dark:bg-black text-black dark:text-white">
       {comments.map((comment) => (
         <div key={comment.id}>
           <img src={comment.user.avatar} className="h-10 rounded-full" />
-          <h1>{comment.user.username}</h1>
+          <h1><Link to={`/profile/${comment.user.id}`}>{comment.user.username}</Link></h1>
           <p>{comment.text}</p>
           <p>{comment.likes.length}</p>
         </div>

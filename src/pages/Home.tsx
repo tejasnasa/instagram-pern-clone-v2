@@ -38,28 +38,27 @@ const HomePage: React.FC = () => {
   console.log(posts);
 
   return (
-    <main className="dark:bg-black bg-white dark:text-white text-black flex lg:justify-center justify-end">
-      <div className="flex flex-col lg:w-5/12 lg:mr-0 w-8/12 mr-10 lg:pr-32">
-        <Stories />
+    <main className="dark:bg-black bg-white dark:text-white text-black flex ml-[240px] mr-[440px]">
+        <div className="flex flex-col">
+          <Stories />
 
-        <Suspense
-          fallback={
-            <section className="flex flex-wrap flex-col items-center justify-center mt-5 bg-red-600 h-[400px]">
-              <hr className="mt-[300px] h-[1px] bg-gray-200 border-0 dark:bg-gray-700" />
+          <Suspense
+            fallback={
+              <section className="flex flex-wrap flex-col items-center justify-center mt-5 bg-red-600 h-[400px]">
+                <hr className="mt-[300px] h-[1px] bg-gray-200 border-0 dark:bg-gray-700" />
+              </section>
+            }
+          >
+            <section className="flex flex-wrap flex-col items-center justify-center mt-5">
+              {Array.isArray(posts) && posts.length > 0 ? (
+                posts.map((post) => <Post key={post.id} post={post} />)
+              ) : (
+                <p>No posts available.</p>
+              )}
             </section>
-          }
-        >
-          <section className="flex flex-wrap flex-col items-center justify-center mt-5">
-            {Array.isArray(posts) && posts.length > 0 ? (
-              posts.map((post) => <Post key={post.id} post={post} />)
-            ) : (
-              <p>No posts available.</p>
-            )}
-          </section>
-        </Suspense>
-      </div>
-
-      <People />
+          </Suspense>
+        </div>
+          <People />
     </main>
   );
 };

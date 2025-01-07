@@ -6,7 +6,6 @@ const UpsideDropdown: React.FC = () => {
 
   const toggleDropdown = () => setIsOpen((prev) => !prev);
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -21,39 +20,35 @@ const UpsideDropdown: React.FC = () => {
   }, []);
 
   return (
-    <div className="relative inline-block" ref={dropdownRef}>
-      {/* Dropdown Trigger */}
+    <div className="relative inline-block bg-white dark:bg-black text-black dark:text-white" ref={dropdownRef}>
       <button
         onClick={toggleDropdown}
-        className="bg-blue-500 text-white px-4 py-2 rounded"
+        className=" px-4 py-2 rounded"
       >
         Open Menu
       </button>
 
-      {/* Dropdown Menu */}
       {isOpen && (
-        <div className="absolute bottom-full mb-2 bg-white shadow-md rounded w-48 text-black z-10">
+        <div className="absolute bottom-full mb-2  shadow-md rounded w-48 bg-inherit z-10 border-[1px] border-gray-700">
           <ul className="flex flex-col text-sm">
-            {/* Buttons */}
             <li>
-              <button className="w-full px-4 py-2 hover:bg-gray-100">
+              <button className="w-full px-4 py-2 hover:bg-gray-100 hover:dark:bg-gray-800">
                 Button 1
               </button>
             </li>
             <li>
-              <button className="w-full px-4 py-2 hover:bg-gray-100">
+              <button className="w-full px-4 py-2 hover:bg-gray-100 hover:dark:bg-gray-800">
                 Button 2
               </button>
             </li>
             <li>
-              <button className="w-full px-4 py-2 hover:bg-gray-100">
+              <button className="w-full px-4 py-2 hover:bg-gray-100 hover:dark:bg-gray-800">
                 Button 3
               </button>
             </li>
-            {/* Divider */}
             <hr className="border-t my-1" />
             <li>
-              <button className="w-full px-4 py-2 hover:bg-gray-100">
+              <button className="w-full px-4 py-2 hover:bg-gray-100 hover:dark:bg-gray-800">
                 Button 4
               </button>
             </li>

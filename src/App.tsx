@@ -38,7 +38,7 @@ const App: React.FC = () => {
   useEffect(() => {
     const theme = localStorage.getItem("darkMode");
     if (theme === null) {
-      localStorage.setItem("darkMode", "false");
+      localStorage.setItem("darkMode", "true");
     } else {
       setIsDarkMode(theme === "true");
     }

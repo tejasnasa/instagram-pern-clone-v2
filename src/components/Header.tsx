@@ -37,7 +37,7 @@ const Header: React.FC = () => {
   }, [location.pathname]);
 
   return (
-    <header className="bg-black text-white p-4">
+    <header className="bg-black text-white">
     </header>
   );
 };

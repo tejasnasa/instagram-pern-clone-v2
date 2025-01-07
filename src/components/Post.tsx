@@ -148,7 +148,7 @@ const Post: React.FC<PostProps> = ({ post }) => {
               src={url}
               key={i++}
               alt="Post"
-              className="max-h-[600px] mt-auto mb-auto"
+              className="max-w-auto mt-auto mb-auto"
             />
           </div>
         ))}
