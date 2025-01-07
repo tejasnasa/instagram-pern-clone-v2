@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Post from "../components/Post";
-import Loading from "../components/Loading";
 import Comments from "../components/Comments";
+import NotFoundPage from "./NotFound";
 
 interface Post {
   id: string;
@@ -24,10 +24,10 @@ interface Post {
 const PostDetails: React.FC = () => {
   const { postid } = useParams<{ postid: string }>();
   const [post, setPost] = useState<Post | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [notFound, setNotFound] = useState<boolean>(false);
 
   const fetchPostDetails = async () => {
-    setIsLoading(true);
     try {
       const response = await axios.get(
         `${import.meta.env.VITE_BASE_URL}/v1/posts/details/${postid}`,
@@ -39,10 +39,12 @@ const PostDetails: React.FC = () => {
       );
       const postData = response.data.responseObject;
       setPost(postData);
+      setNotFound(false);
     } catch (err) {
       console.error("Error fetching post details:", err);
+      setNotFound(true); // If an error occurs, mark the post as not found
     } finally {
-      setIsLoading(false);
+      setLoading(false); // Set loading to false after fetch attempt
     }
   };
 
@@ -56,19 +58,32 @@ const PostDetails: React.FC = () => {
     }
   }, [post]);
 
-  if (!post || isLoading) {
-    return <Loading />;
+  if (loading) {
+    return (
+      <main className="bg-black text-white pl-64 pr-32 min-h-dvh w-dvw flex">
+      </main>
+    );
+  }
+
+  if (notFound) {
+    return <NotFoundPage />;
   }
 
   return (
-    <main className="bg-black text-white pl-64 pr-32 min-h-dvh w-dvw flex">
-      <Post key={post.id} post={post} />
-      <Comments
-        comments={post.comments}
-        postid={post.id}
-        refreshPost={fetchPostDetails}
-      />
-    </main>
+    <Suspense
+      fallback={
+        <main className="bg-black text-white pl-64 pr-32 min-h-dvh w-dvw flex"></main>
+      }
+    >
+      <main className="bg-black text-white pl-64 pr-32 min-h-dvh w-dvw flex">
+        <Post key={post!.id} post={post!} />
+        <Comments
+          comments={post!.comments}
+          postid={post!.id}
+          refreshPost={fetchPostDetails}
+        />
+      </main>
+    </Suspense>
   );
 };
 

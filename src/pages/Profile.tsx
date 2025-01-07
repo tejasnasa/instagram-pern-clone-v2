@@ -4,7 +4,6 @@ import { Link, useParams } from "react-router-dom";
 import { SlOptions } from "react-icons/sl";
 import { FaHeart } from "react-icons/fa";
 import { BiSolidMessageRounded } from "react-icons/bi";
-import Loading from "../components/Loading";
 
 interface UserProfile {
   id: string;
@@ -23,7 +22,6 @@ const ProfilePage: React.FC = () => {
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
   const [loggedInUserId, setLoggedInUserId] = useState<string | null>(null);
   const [isFollowing, setIsFollowing] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchLoggedInUserId = async () => {
@@ -64,13 +62,10 @@ const ProfilePage: React.FC = () => {
         setIsFollowing(isUserFollowing);
       } catch (err) {
         console.error("Error fetching user data:", err);
-      } finally {
-        setIsLoading(false);
-      }
+      } 
     };
 
     const initialize = async () => {
-      setIsLoading(true);
       if (!loggedInUserId) {
         await fetchLoggedInUserId();
       }
@@ -104,17 +99,11 @@ const ProfilePage: React.FC = () => {
     }
   };
 
-  const LoadingScreen = () => <Loading />;
-
   useEffect(() => {
     if (userProfile) {
       document.title = `${userProfile.username} - Profile`;
     }
   }, [userProfile]);
-
-  if (isLoading) {
-    return <LoadingScreen />;
-  }
 
   if (!userProfile || !loggedInUserId) {
     return <div>No profile found.</div>;

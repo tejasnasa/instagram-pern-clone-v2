@@ -9,7 +9,7 @@ const CreatePost = () => {
     imageurl: [] as string[],
   });
   const [imageFiles, setImageFiles] = useState<File[]>([]);
-  const [uploading, setUploading] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -18,55 +18,40 @@ const CreatePost = () => {
     setImageFiles(files);
   };
 
-  const handleImageUpload = async () => {
-    if (imageFiles.length === 0) {
-      alert("Please select images to upload.");
-      return;
+  const uploadImages = async (files: File[]): Promise<string[]> => {
+    const uploadedUrls: string[] = [];
+    for (const file of files) {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", "xs7v2usy");
+      const { data } = await axios.post(
+        "https://api.cloudinary.com/v1_1/dvhykaekv/image/upload",
+        formData
+      );
+      uploadedUrls.push(data.secure_url);
     }
+    return uploadedUrls;
+  };
 
-    setUploading(true);
-    setIsLoading(true);
-
+  const handleImageUpload = async () => {
+    if (imageFiles.length === 0)
+      return alert("Please select images to upload.");
+    setIsUploading(true);
     try {
-      const uploadedUrls: string[] = [];
-
-      for (const file of imageFiles) {
-        const fileData = new FormData();
-        fileData.append("file", file);
-        fileData.append("upload_preset", "xs7v2usy");
-
-        const response = await axios.post(
-          "https://api.cloudinary.com/v1_1/dvhykaekv/image/upload",
-          fileData
-        );
-
-        console.log(response);
-
-        uploadedUrls.push(response.data.secure_url);
-      }
-
-      setFormData((prevData) => ({
-        ...prevData,
-        imageurl: uploadedUrls,
-      }));
+      const uploadedUrls = await uploadImages(imageFiles);
+      setFormData((prev) => ({ ...prev, imageurl: uploadedUrls }));
     } catch (err) {
-      console.error("Error uploading images:", err);
+      handleError(err, "Error uploading images.");
     } finally {
-      setUploading(false);
-      setIsLoading(false);
+      setIsUploading(false);
     }
   };
 
-  console.log(formData);
-
   const handleSubmitPost = async () => {
-    if (formData.imageurl.length === 0) {
-      alert("Please upload images first.");
-      return;
-    }
-
+    if (formData.imageurl.length === 0)
+      return alert("Please upload images first.");
+    setIsLoading(true);
     try {
-      setIsLoading(true);
       await axios.post(
         `${import.meta.env.VITE_BASE_URL}/v1/posts/create`,
         formData,
@@ -76,17 +61,20 @@ const CreatePost = () => {
           },
         }
       );
-      setIsLoading(false);
       navigate("/");
     } catch (err) {
-      console.error("Error during post creation:", err);
+      handleError(err, "Error creating post.");
+    } finally {
       setIsLoading(false);
     }
   };
 
-  if (isLoading) {
-    return <Loading />;
-  }
+  const handleError = (error: any, message: string) => {
+    console.error(message, error);
+    alert(message);
+  };
+
+  if (isLoading) return <Loading />;
 
   return (
     <main className="bg-black text-white pl-[250px] pr-48 min-h-dvh w-dvw flex flex-col items-center">
@@ -96,15 +84,16 @@ const CreatePost = () => {
         accept="image/*"
         multiple
         onChange={handleImageChange}
+        className="mt-4"
       />
       <button
         onClick={handleImageUpload}
-        disabled={uploading}
+        disabled={isUploading}
         className={`${
-          uploading ? "bg-gray-500" : "bg-blue-500"
+          isUploading ? "bg-gray-500" : "bg-blue-500"
         } text-white p-2 mt-4 rounded`}
       >
-        {uploading ? "Uploading..." : "Upload Images"}
+        {isUploading ? "Uploading..." : "Upload Images"}
       </button>
       <div className="mt-4 flex flex-wrap gap-4">
         {formData.imageurl.map((url, index) => (
@@ -112,26 +101,27 @@ const CreatePost = () => {
             key={index}
             src={url}
             alt={`Uploaded Preview ${index + 1}`}
-            className="max-w-[200px] max-h-[200px] object-cover"
+            className="max-w-[200px] max-h-[200px] object-cover rounded"
           />
         ))}
       </div>
-      <div className="h-[82px] w-[802px] bg-gray-700 flex justify-center items-center mb-4 mt-24">
+      <div className="h-[82px] w-[802px] bg-gray-700 flex justify-center items-center my-8">
         <textarea
           name="caption"
           placeholder="Write a caption..."
+          value={formData.caption}
           onChange={(e) =>
             setFormData({ ...formData, caption: e.target.value })
           }
-          className="bg-black border-1 border-solid border-white h-20 w-[800px] flex align-middle resize-none p-3"
+          className="bg-black border border-white h-20 w-[800px] resize-none p-3"
         />
       </div>
       <button
         onClick={handleSubmitPost}
+        disabled={isLoading}
         className={`${
           isLoading ? "bg-gray-500" : "bg-blue-500"
-        } text-white p-3 mt-8 rounded-lg`}
-        disabled={isLoading}
+        } text-white p-3 rounded-lg`}
       >
         {isLoading ? "Creating Post..." : "Create Post"}
       </button>

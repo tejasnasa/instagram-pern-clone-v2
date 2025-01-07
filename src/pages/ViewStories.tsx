@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Loading from "../components/Loading";
 import axios from "axios";
+import NotFoundPage from "./NotFound";
 
 interface Story {
   id: string;
@@ -40,7 +40,7 @@ const ViewStories = () => {
   }, [storyid]);
 
   if (!story) {
-    return <Loading />;
+    return <NotFoundPage />;
   }
 
   return (

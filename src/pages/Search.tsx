@@ -12,11 +12,13 @@ const Search: React.FC = () => {
   const [query, setQuery] = useState<string>("");
   const [results, setResults] = useState<SearchResult[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const [noResults, setNoResults] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchResults = async () => {
       if (!query) {
         setResults([]);
+        setNoResults(false);
         return;
       }
 
@@ -33,8 +35,9 @@ const Search: React.FC = () => {
             },
           }
         );
-        console.log(response);
-        setResults(response.data.responseObject);
+        const fetchedResults = response.data.responseObject;
+        setResults(fetchedResults);
+        setNoResults(fetchedResults === null);
       } catch (error) {
         console.error("Error fetching search results:", error);
       } finally {
@@ -55,7 +58,10 @@ const Search: React.FC = () => {
         onChange={(e) => setQuery(e.target.value)}
         className="ml-48 h-10 w-48 rounded bg-white"
       />
-      {loading && <p>Loading...</p>}
+      {loading && <p className="ml-48 text-white">Loading...</p>}
+      {!loading && noResults && query && (
+        <p className="ml-48 text-white">No users found.</p>
+      )}
       <div className="ml-48 text-white">
         {results.map((result) => (
           <div key={result.id} className="flex items-center p-2">

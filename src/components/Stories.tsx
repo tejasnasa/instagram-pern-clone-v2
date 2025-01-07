@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Loading from "./Loading";
 import { Link } from "react-router-dom";
 
 interface Story {
@@ -17,12 +16,10 @@ interface Story {
 
 const Stories = () => {
   const [stories, setStories] = useState<Story[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        setIsLoading(true);
         setTimeout(async () => {
           try {
             const response = await axios.get(
@@ -38,13 +35,10 @@ const Stories = () => {
             setStories(response.data.responseObject);
           } catch (err) {
             console.error("Error fetching posts:", err);
-          } finally {
-            setIsLoading(false);
-          }
+          } 
         }, 1000);
       } catch (err) {
         console.error("Error fetching posts:", err);
-        setIsLoading(false);
       }
     };
 
@@ -52,10 +46,6 @@ const Stories = () => {
   }, []);
 
   console.log(stories);
-
-  if (isLoading) {
-    return <Loading />;
-  }
 
   return (
     <main className="bg-black text-white flex">
