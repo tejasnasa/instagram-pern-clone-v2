@@ -10,17 +10,14 @@ import HomePage from "./pages/Home";
 import LoginPage from "./pages/Login";
 import ProfilePage from "./pages/Profile";
 import SignUpPage from "./pages/Signup";
-import CreatePost from "./pages/CreatePost";
 import PostDetails from "./pages/ViewPost";
 import Navbar from "./components/Navbar";
 import Loading from "./components/Loading";
 import NotFoundPage from "./pages/NotFound";
 import Header from "./components/Header";
 import Explore from "./pages/Explore";
-import Search from "./components/Search";
 import ViewStories from "./pages/ViewStories";
 import CreateChoice from "./pages/CreateChoice";
-import CreateStory from "./pages/CreateStory";
 import Settings from "./pages/Settings";
 import Activity from "./pages/Activity";
 
@@ -135,22 +132,6 @@ const App: React.FC = () => {
                 element={
                   <ProtectedRoute>
                     <CreateChoice />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/create/story"
-                element={
-                  <ProtectedRoute>
-                    <CreateStory />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/create/post"
-                element={
-                  <ProtectedRoute>
-                    <CreatePost />
                   </ProtectedRoute>
                 }
               />
