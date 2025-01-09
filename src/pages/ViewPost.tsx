@@ -1,9 +1,10 @@
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Post from "../components/Post";
 import Comments from "../components/Comments";
 import NotFoundPage from "./NotFound";
+import Loader from "../components/Loader";
 
 interface Post {
   id: string;
@@ -42,9 +43,9 @@ const PostDetails: React.FC = () => {
       setNotFound(false);
     } catch (err) {
       console.error("Error fetching post details:", err);
-      setNotFound(true); // If an error occurs, mark the post as not found
+      setNotFound(true);
     } finally {
-      setLoading(false); // Set loading to false after fetch attempt
+      setLoading(false);
     }
   };
 
@@ -60,8 +61,7 @@ const PostDetails: React.FC = () => {
 
   if (loading) {
     return (
-      <main className="bg-black text-white pl-64 pr-32 min-h-dvh w-dvw flex">
-      </main>
+      <Loader/>
     );
   }
 
@@ -70,12 +70,7 @@ const PostDetails: React.FC = () => {
   }
 
   return (
-    <Suspense
-      fallback={
-        <main className="bg-black text-white pl-64 pr-32 min-h-dvh w-dvw flex"></main>
-      }
-    >
-      <main className="bg-black text-white pl-64 pr-32 min-h-dvh w-dvw flex">
+      <main className="bg-black text-white ml-[240px] min-h-dvh w-dvw flex px-32">
         <Post key={post!.id} post={post!} />
         <Comments
           comments={post!.comments}
@@ -83,7 +78,6 @@ const PostDetails: React.FC = () => {
           refreshPost={fetchPostDetails}
         />
       </main>
-    </Suspense>
   );
 };
 

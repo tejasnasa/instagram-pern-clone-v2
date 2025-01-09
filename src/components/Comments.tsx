@@ -59,16 +59,33 @@ const Comments = ({ comments, postid, refreshPost }: CommentsProps) => {
   };
 
   return (
-    <section className="bg-white dark:bg-black text-black dark:text-white">
-      {comments.map((comment) => (
-        <div key={comment.id}>
-          <img src={comment.user.avatar} className="h-10 rounded-full" />
-          <h1><Link to={`/profile/${comment.user.id}`}>{comment.user.username}</Link></h1>
-          <p>{comment.text}</p>
-          <p>{comment.likes.length}</p>
-        </div>
-      ))}
-      <form onSubmit={handleComment}>
+    <section className="bg-white dark:bg-black text-black dark:text-white flex flex-col max-h-dvh overflow-hidden p-12">
+      <div className="flex-grow overflow-y-auto">
+        {comments.map((comment) => (
+          <div key={comment.id} className="mb-4">
+            <div className="flex text-sm items-center">
+              <img
+                src={comment.user.avatar}
+                className="h-10 rounded-full m-1 mx-3"
+                alt="Avatar"
+              />
+              <div>
+                <span className="font-semibold">
+                  <Link to={`/profile/${comment.user.id}`}>
+                    {comment.user.username}
+                  </Link>
+                </span>&nbsp;
+                <span>{comment.text}</span>
+                <div className="text-[13px] text-gray-300">{comment.likes.length} likes&nbsp;&nbsp; Reply</div>
+              </div>
+            </div>
+
+            
+          </div>
+        ))}
+      </div>
+
+      <form onSubmit={handleComment} className="mt-4 flex-shrink-0">
         <input
           type="text"
           value={formData.text}
