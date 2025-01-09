@@ -143,10 +143,9 @@ const Post: React.FC<PostProps> = ({ post }) => {
       </Link>
       <Carousel showThumbs={false} showStatus={false}>
         {post.imageurl.map((url) => (
-          <div className="flex justify-center items-center h-full">
+          <div className="flex justify-center items-center h-full" key={i++}>
             <img
               src={url}
-              key={i++}
               alt="Post"
               className="mt-auto mb-auto"
             />
