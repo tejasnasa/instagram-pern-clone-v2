@@ -85,19 +85,19 @@ const Comments = ({ comments, postid, refreshPost }: CommentsProps) => {
         ))}
       </div>
 
-      <form onSubmit={handleComment} className="mt-4 flex-shrink-0">
+      <form onSubmit={handleComment} className="mt-4 flex">
         <input
           type="text"
           value={formData.text}
           name="text"
           onChange={handleChange}
-          className="bg-black border-gray-500 border-2 p-2 w-80 text-sm m-1"
+          className="bg-black border-gray-500 border-2 p-2 text-sm m-1 w-full"
         />
         <button
           type="submit"
-          className="w-80 p-auto text-center bg-blue-600 m-1 rounded-md p-1 align-middle"
+          className=" p-auto text-center bg-black text-blue-600 m-1 rounded-md p-2 align-middle"
         >
-          Submit
+          Post
         </button>
       </form>
     </section>

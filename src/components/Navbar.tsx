@@ -8,6 +8,7 @@ import { MdHomeFilled, MdOutlineExplore } from "react-icons/md";
 import { RiMessengerLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import UpsideDropdown from "./DropDown";
+import Search from "./Search";
 
 interface NavbarProps {
   handleLogout: () => void;
@@ -69,13 +70,7 @@ const Navbar: React.FC<NavbarProps> = ({ handleLogout, handleTheme }) => {
             </Link>
           </li>
           <li>
-            <a
-              href="/search"
-              className="flex items-center m-3 text-md font-medium"
-            >
-              <CiSearch size={30} className="m-2 mr-4" />
-              Search
-            </a>
+            <Search />
           </li>
           <li>
             <a

@@ -17,7 +17,7 @@ import Loading from "./components/Loading";
 import NotFoundPage from "./pages/NotFound";
 import Header from "./components/Header";
 import Explore from "./pages/Explore";
-import Search from "./pages/Search";
+import Search from "./components/Search";
 import ViewStories from "./pages/ViewStories";
 import CreateChoice from "./pages/CreateChoice";
 import CreateStory from "./pages/CreateStory";
@@ -103,14 +103,6 @@ const App: React.FC = () => {
                 element={
                   <ProtectedRoute>
                     <Explore />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/search"
-                element={
-                  <ProtectedRoute>
-                    <Search />
                   </ProtectedRoute>
                 }
               />
