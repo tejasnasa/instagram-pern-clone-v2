@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Post from "../components/Post";
 import People from "../components/People";
+import Loader from "../components/Loader";
 
 const Explore: React.FC = () => {
   const [posts, setPosts] = useState<any[]>([]);
@@ -35,16 +36,16 @@ const Explore: React.FC = () => {
   }, []);
 
   return (
-    <main className="dark:bg-black bg-white dark:text-white text-black flex lg:justify-center justify-end">
-        <div className="flex flex-col lg:w-5/12 lg:mr-0 w-8/12 mr-10 lg:pr-32">
-          <section className="flex flex-wrap flex-col items-center justify-center mt-5">
-            {Array.isArray(posts) && posts.length > 0 ? (
-              posts.map((post) => <Post key={post.id} post={post} />)
-            ) : (
-              <p>No posts available.</p>
-            )}
-          </section>
-        </div>
+    <main className="dark:bg-black bg-white dark:text-white text-black flex w-full ml-[240px] mr-0 lg:mr-[400px]">
+      <div className="flex flex-col flex-grow items-center">
+        <section className="flex flex-col items-center justify-center mt-5 w-full">
+          {Array.isArray(posts) && posts.length > 0 ? (
+            posts.map((post) => <Post key={post.id} post={post} />)
+          ) : (
+            <Loader />
+          )}
+        </section>
+      </div>
 
       <People />
     </main>

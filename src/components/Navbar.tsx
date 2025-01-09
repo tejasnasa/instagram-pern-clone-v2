@@ -72,13 +72,13 @@ const Navbar: React.FC<NavbarProps> = ({ handleLogout, handleTheme }) => {
             <Search />
           </li>
           <li>
-            <a
-              href="/explore"
+            <Link
+              to="/explore"
               className="flex items-center m-3 text-md font-medium"
             >
               <MdOutlineExplore size={30} className="m-2 mr-4" />
               Explore
-            </a>
+            </Link>
           </li>
           <li>
             <a href="#" className="flex items-center m-3 text-md font-medium">

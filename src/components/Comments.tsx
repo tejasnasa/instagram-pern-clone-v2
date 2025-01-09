@@ -59,24 +59,24 @@ const Comments = ({ comments, postid, refreshPost }: CommentsProps) => {
   };
 
   return (
-    <section className="bg-white dark:bg-black text-black dark:text-white flex flex-col max-h-dvh overflow-hidden p-12">
-      <div className="flex-grow overflow-y-auto">
+    <section className="bg-white dark:bg-black text-black dark:text-white flex flex-col max-h-dvh overflow-hidden p-6 w-[400px] ml-10">
+      <div className="flex-grow overflow-y-auto w-[400px]">
         {comments.map((comment) => (
           <div key={comment.id} className="mb-4">
             <div className="flex text-sm items-center">
               <img
                 src={comment.user.avatar}
-                className="h-10 rounded-full m-1 mx-3"
+                className="h-10 rounded-full m-1 mr-6"
                 alt="Avatar"
               />
-              <div>
+              <div className="mt-2">
                 <span className="font-semibold">
                   <Link to={`/profile/${comment.user.id}`}>
                     {comment.user.username}
                   </Link>
                 </span>&nbsp;
                 <span>{comment.text}</span>
-                <div className="text-[13px] text-gray-300">{comment.likes.length} likes&nbsp;&nbsp; Reply</div>
+                <div className="text-xs text-gray-300 mt-2">{comment.likes.length} likes&nbsp;&nbsp; Reply</div>
               </div>
             </div>
 
@@ -85,17 +85,17 @@ const Comments = ({ comments, postid, refreshPost }: CommentsProps) => {
         ))}
       </div>
 
-      <form onSubmit={handleComment} className="mt-4 flex">
+      <form onSubmit={handleComment} className="mt-4 flex w-[400px]">
         <input
           type="text"
           value={formData.text}
           name="text"
           onChange={handleChange}
-          className="bg-black border-gray-500 border-2 p-2 text-sm m-1 w-full"
+          className="bg-black border-gray-500 border-2 p-2 text-sm w-3/4"
         />
         <button
           type="submit"
-          className=" p-auto text-center bg-black text-blue-600 m-1 rounded-md p-2 align-middle"
+          className=" bg-black text-blue-600 w-1/4"
         >
           Post
         </button>
