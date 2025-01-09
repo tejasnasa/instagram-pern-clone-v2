@@ -46,7 +46,7 @@ const Navbar: React.FC<NavbarProps> = ({ handleLogout, handleTheme }) => {
   }, [loggedInUser]);
 
   return (
-    <div className="pt-6 w-[240px] dark:bg-black bg-white dark:text-white text-black flex flex-col justify-between h-lvh fixed border-r-[1px] border-gray-300 dark:border-gray-600 border-solid">
+    <div className="pt-6 w-[240px] dark:bg-black bg-white dark:text-white text-black flex flex-col justify-between h-lvh fixed border-r-[1px] border-gray-300 dark:border-gray-800 border-solid">
       <div>
         <img
           src="/images/login2-light.png"
@@ -59,10 +59,10 @@ const Navbar: React.FC<NavbarProps> = ({ handleLogout, handleTheme }) => {
           className="h-14 hidden dark:block"
         />
         <ul className="">
-          <li>
+          <li className="">
             <Link
               to={"/"}
-              className="flex items-center m-3 text-md font-medium"
+              className="flex items-center m-3 text-md font-medium transition ease-in-out hover:bg-[#1A1A1A] rounded-lg"
             >
               <MdHomeFilled size={30} className="m-2 mr-4" />
               Home
@@ -74,26 +74,26 @@ const Navbar: React.FC<NavbarProps> = ({ handleLogout, handleTheme }) => {
           <li>
             <Link
               to="/explore"
-              className="flex items-center m-3 text-md font-medium"
+              className="flex items-center m-3 text-md font-medium transition ease-in-out hover:bg-[#1A1A1A] rounded-lg"
             >
               <MdOutlineExplore size={30} className="m-2 mr-4" />
               Explore
             </Link>
           </li>
           <li>
-            <a href="#" className="flex items-center m-3 text-md font-medium">
+            <a href="#" className="flex items-center m-3 text-md font-medium transition ease-in-out hover:bg-[#1A1A1A] rounded-lg">
               <BiMoviePlay size={30} className="m-2 mr-4" />
               Reels
             </a>
           </li>
           <li>
-            <a href="#" className="flex items-center m-3 text-md font-medium">
+            <a href="#" className="flex items-center m-3 text-md font-medium transition ease-in-out hover:bg-[#1A1A1A] rounded-lg">
               <RiMessengerLine size={30} className="m-2 mr-4" />
               Messages
             </a>
           </li>
           <li>
-            <a href="#" className="flex items-center m-3 text-md font-medium">
+            <a href="#" className="flex items-center m-3 text-md font-medium transition ease-in-out hover:bg-[#1A1A1A] rounded-lg">
               <FaRegHeart size={25} className="m-2 mr-4" />
               Notifications
             </a>
@@ -101,7 +101,7 @@ const Navbar: React.FC<NavbarProps> = ({ handleLogout, handleTheme }) => {
           <li>
             <Link
               to={"/create"}
-              className="flex items-center m-3 text-md font-medium"
+              className="flex items-center m-3 text-md font-medium transition ease-in-out hover:bg-[#1A1A1A] rounded-lg"
             >
               <FiPlusSquare size={30} className="m-2 mr-4" />
               Create
@@ -111,7 +111,7 @@ const Navbar: React.FC<NavbarProps> = ({ handleLogout, handleTheme }) => {
             {loggedInUser?.avatar && (
               <Link
                 to={`profile/${loggedInUser.id}`}
-                className="flex items-center m-3 text-md font-medium"
+                className="flex items-center m-3 text-md font-medium transition ease-in-out hover:bg-[#1A1A1A] rounded-lg"
               >
                 <img
                   src={loggedInUser.avatar}
@@ -125,15 +125,7 @@ const Navbar: React.FC<NavbarProps> = ({ handleLogout, handleTheme }) => {
         </ul>
       </div>
 
-      <div>
-        <button onClick={handleTheme} className="block px-4 py-2">
-          Change theme
-        </button>
-        <button onClick={handleLogout} className="block px-4 py-2">
-          Logout
-        </button>
-        <UpsideDropdown />
-      </div>
+        <UpsideDropdown handleLogout={handleLogout} handleTheme={handleTheme} />
     </div>
   );
 };
