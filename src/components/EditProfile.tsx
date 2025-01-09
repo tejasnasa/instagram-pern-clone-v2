@@ -59,7 +59,7 @@ const EditProfile = () => {
   };
 
   return (
-    <main className="dark:bg-black bg-white dark:text-white text-black pl-96 pr-32 w-dvw">
+    <main className="dark:bg-black bg-white dark:text-white text-black">
       <section className="flex flex-col">
         <h2>EDIT PROFILE</h2>
         <form onSubmit={handleEditProfile}>

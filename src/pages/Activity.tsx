@@ -48,7 +48,7 @@ const Activity = () => {
   }, []);
 
   return (
-    <main className="dark:bg-black bg-white dark:text-white text-black flex flex-col w-full ml-[240px] mr-0 lg:mr-[400px]">
+    <main className="dark:bg-black bg-white dark:text-white text-black flex justify-center w-full ml-[240px] mr-[240px]">
       <div className="flex flex-col flex-grow items-center border-[1px] dark:border-gray-600">
         <div className="flex justify-center bg-black text-white w-full h-16 border-[1px] dark:border-gray-600">
           <button
