@@ -12,7 +12,7 @@ import ProfilePage from "./pages/Profile";
 import SignUpPage from "./pages/Signup";
 import PostDetails from "./pages/ViewPost";
 import Navbar from "./components/Navbar";
-import Loading from "./components/Loading";
+import Loading from "./pages/Loading";
 import NotFoundPage from "./pages/NotFound";
 import Header from "./components/Header";
 import Explore from "./pages/Explore";

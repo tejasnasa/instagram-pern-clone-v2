@@ -31,7 +31,7 @@ const HomePage: React.FC = () => {
   console.log(posts);
 
   return (
-    <main className="dark:bg-black bg-white dark:text-white text-black flex w-full ml-[240px] mr-0 lg:mr-[400px]">
+    <main className="dark:bg-black bg-white dark:text-white text-black flex w-screen pl-[240px] mr-0 lg:pr-[400px]">
       <div className="flex flex-col flex-grow items-center">
         <Stories />
         <section className="flex flex-col items-center justify-center mt-5 w-full">

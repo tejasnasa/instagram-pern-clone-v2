@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Loading from "./Loading";
+import Loading from "../pages/Loading";
 
 const CreateStory = () => {
   const [formData, setFormData] = useState({

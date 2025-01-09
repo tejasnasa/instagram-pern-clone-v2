@@ -15,7 +15,7 @@ const Loading = () => {
       }}
       className="dark:bg-black bg-white dark:text-white text-black"
     >
-      <div
+      <div className="w-[50px] h-[50px] border-[5px] dark:border-white/30 border-black/30 border-t-[5px] dark:border-t-white border-t-black rounded-[50%] animate-spin "
         style={{
           width: "50px",
           height: "50px",

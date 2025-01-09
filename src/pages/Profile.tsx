@@ -195,7 +195,7 @@ const ProfilePage: React.FC = () => {
                 <Link
                   key={post.id}
                   to={`/post/${post.id}`}
-                  className="relative aspect-square bg-black overflow-hidden"
+                  className="relative aspect-square bg-black overflow-hidden z-0"
                 >
                   <img
                     src={post.imageurl[0]}

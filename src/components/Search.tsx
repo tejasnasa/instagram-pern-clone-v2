@@ -76,7 +76,7 @@ const Search: React.FC = () => {
     <div>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center m-3 text-md font-medium w-[90%] transition ease-in-out hover:bg-[#1A1A1A] rounded-lg"
+        className="flex items-center m-3 text-md font-medium w-[90%] transition ease-in-out hover:bg-[#F2F2F2] dark:hover:bg-[#1A1A1A] rounded-lg"
       >
         <CiSearch size={30} className="m-2 mr-4" />
         Search
@@ -84,13 +84,9 @@ const Search: React.FC = () => {
 
       <div
         ref={navbarRef}
-        className={`fixed top-0 left-0 w-[400px] bg-black text-white p-4 shadow-lg transition-all duration-300 ${
+        className={`fixed top-0 left-0 w-[400px] dark:bg-black bg-white dark:text-white text-black p-4 shadow-lg transition-all duration-300 z-[1000] h-screen ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
-        style={{
-          zIndex: 100,
-          height: "100vh",
-        }}
       >
         <h1 className="text-2xl font-semibold m-2">Search</h1>
         <input
@@ -98,7 +94,7 @@ const Search: React.FC = () => {
           placeholder="Search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className="w-full h-10 p-2 mt-8 mb-6 rounded bg-[#363636] text-white"
+          className="w-full h-10 p-2 mt-8 mb-6 rounded dark:bg-[#363636] bg-[#EFEFEF] focus:outline-none dark:text-white text-black"
         />
 
         {loading && (
@@ -124,7 +120,7 @@ const Search: React.FC = () => {
                   <span className="text-sm font-semibold">
                     {result.username}
                   </span>
-                  <span className="text-sm text-gray-400">
+                  <span className="text-sm dark:text-gray-400 text-gray-500">
                     {result.fullname} • {result._count.followers} followers
                   </span>
                 </div>

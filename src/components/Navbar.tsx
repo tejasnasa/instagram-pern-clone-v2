@@ -62,7 +62,7 @@ const Navbar: React.FC<NavbarProps> = ({ handleLogout, handleTheme }) => {
           <li className="">
             <Link
               to={"/"}
-              className="flex items-center m-3 text-md font-medium transition ease-in-out hover:bg-[#1A1A1A] rounded-lg"
+              className="flex items-center m-3 text-md font-medium transition ease-in-out hover:bg-[#F2F2F2] dark:hover:bg-[#1A1A1A] rounded-lg"
             >
               <MdHomeFilled size={30} className="m-2 mr-4" />
               Home
@@ -74,26 +74,26 @@ const Navbar: React.FC<NavbarProps> = ({ handleLogout, handleTheme }) => {
           <li>
             <Link
               to="/explore"
-              className="flex items-center m-3 text-md font-medium transition ease-in-out hover:bg-[#1A1A1A] rounded-lg"
+              className="flex items-center m-3 text-md font-medium transition ease-in-out hover:bg-[#F2F2F2] dark:hover:bg-[#1A1A1A] rounded-lg"
             >
               <MdOutlineExplore size={30} className="m-2 mr-4" />
               Explore
             </Link>
           </li>
           <li>
-            <a href="#" className="flex items-center m-3 text-md font-medium transition ease-in-out hover:bg-[#1A1A1A] rounded-lg">
+            <a href="#" className="flex items-center m-3 text-md font-medium transition ease-in-out hover:bg-[#F2F2F2] dark:hover:bg-[#1A1A1A] rounded-lg">
               <BiMoviePlay size={30} className="m-2 mr-4" />
               Reels
             </a>
           </li>
           <li>
-            <a href="#" className="flex items-center m-3 text-md font-medium transition ease-in-out hover:bg-[#1A1A1A] rounded-lg">
+            <a href="#" className="flex items-center m-3 text-md font-medium transition ease-in-out hover:bg-[#F2F2F2] dark:hover:bg-[#1A1A1A] rounded-lg">
               <RiMessengerLine size={30} className="m-2 mr-4" />
               Messages
             </a>
           </li>
           <li>
-            <a href="#" className="flex items-center m-3 text-md font-medium transition ease-in-out hover:bg-[#1A1A1A] rounded-lg">
+            <a href="#" className="flex items-center m-3 text-md font-medium transition ease-in-out hover:bg-[#F2F2F2] dark:hover:bg-[#1A1A1A] rounded-lg">
               <FaRegHeart size={25} className="m-2 mr-4" />
               Notifications
             </a>
@@ -101,7 +101,7 @@ const Navbar: React.FC<NavbarProps> = ({ handleLogout, handleTheme }) => {
           <li>
             <Link
               to={"/create"}
-              className="flex items-center m-3 text-md font-medium transition ease-in-out hover:bg-[#1A1A1A] rounded-lg"
+              className="flex items-center m-3 text-md font-medium transition ease-in-out hover:bg-[#F2F2F2] dark:hover:bg-[#1A1A1A] rounded-lg"
             >
               <FiPlusSquare size={30} className="m-2 mr-4" />
               Create
@@ -111,7 +111,7 @@ const Navbar: React.FC<NavbarProps> = ({ handleLogout, handleTheme }) => {
             {loggedInUser?.avatar && (
               <Link
                 to={`profile/${loggedInUser.id}`}
-                className="flex items-center m-3 text-md font-medium transition ease-in-out hover:bg-[#1A1A1A] rounded-lg"
+                className="flex items-center m-3 text-md font-medium transition ease-in-out hover:bg-[#F2F2F2] dark:hover:bg-[#1A1A1A] rounded-lg"
               >
                 <img
                   src={loggedInUser.avatar}

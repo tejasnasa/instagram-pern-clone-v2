@@ -48,7 +48,7 @@ const Stories = () => {
   console.log(stories);
 
   return (
-    <main className="bg-black text-white flex mt-3 justify-start w-[600px]">
+    <main className="dark:bg-black bg-white dark:text-white text-black flex mt-3 justify-start w-[600px]">
       {stories.map((story) => (
         <Link to={`/story/${story.id}`} className="flex flex-col items-center m-3">
           <img src={story.user.avatar} className="h-14 rounded-full" />

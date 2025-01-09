@@ -56,7 +56,7 @@ const People: React.FC = () => {
   );
 
   return (
-    <div className="fixed end-36 hidden lg:block">
+    <div className="dark:bg-black bg-white dark:text-white text-black fixed end-36 hidden lg:block">
       <div>
         {loggedInUser?.avatar && (
           <Link
@@ -79,7 +79,7 @@ const People: React.FC = () => {
       </div>
 
       <section>
-        <h5 className="pt-8 mb-2 text-gray-300 text-md font-semibold">
+        <h5 className="pt-8 mb-2 dark:text-gray-300 text-gray-500 text-md font-semibold">
           Suggested for you
         </h5>
         {Array.isArray(people) && people.length > 0 ? (
@@ -98,7 +98,7 @@ const People: React.FC = () => {
                 <span className="text-sm font-semibold">
                   {people.username}
                 </span>
-                <span className="text-xs text-gray-300 w-40">Suggested for you</span>
+                <span className="text-xs dark:text-gray-300 text-gray-500 w-40">Suggested for you</span>
               </div>
             </Link>
           ))

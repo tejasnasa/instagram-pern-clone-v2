@@ -7,6 +7,8 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import { FaRegBookmark } from "react-icons/fa";
 import { FaBookmark } from "react-icons/fa";
+import { SlOptions } from "react-icons/sl";
+import { getPostDuration } from "../utils/dateTime";
 
 interface PostProps {
   post: {
@@ -21,6 +23,7 @@ interface PostProps {
     };
     likes: any[];
     bookmarks: any[];
+    created_at: string;
   };
 }
 
@@ -132,23 +135,28 @@ const Post: React.FC<PostProps> = ({ post }) => {
 
   let i = 1;
 
+  const postTime = new Date(post.created_at);
+
   return (
     <div key={post.id} className="mb-5 mt-1 max-w-[500px]">
-      <Link to={`/profile/${post.user.id}`}>
-        <img
-          src={post.user.avatar}
-          className="h-8 mt-2 mb-3 mr-3 rounded-full inline"
-        />
-        <span className="pb-2 text-sm font-semibold">{post.user.username}</span>
-      </Link>
+      <div className="flex justify-between items-center">
+        <Link to={`/profile/${post.user.id}`}>
+          <img
+            src={post.user.avatar}
+            className="h-8 mt-2 mb-3 mr-3 rounded-full inline"
+          />
+          <span className="pb-2 text-sm font-semibold">
+            {post.user.username}&nbsp;
+          </span>
+          <span className="text-sm text-gray-600 dark:text-gray-400">• {getPostDuration(postTime)}</span>
+        </Link>
+        <SlOptions />
+      </div>
+
       <Carousel showThumbs={false} showStatus={false}>
         {post.imageurl.map((url) => (
           <div className="flex justify-center items-center h-full" key={i++}>
-            <img
-              src={url}
-              alt="Post"
-              className="mt-auto mb-auto"
-            />
+            <img src={url} alt="Post" className="mt-auto mb-auto" />
           </div>
         ))}
       </Carousel>
@@ -165,7 +173,7 @@ const Post: React.FC<PostProps> = ({ post }) => {
               <FaRegHeart
                 size={25}
                 onClick={handleLikeToggle}
-                className="text-white cursor-pointer"
+                className="cursor-pointer"
               />
             )}
             <Link to={`/post/${post.id}`}>
@@ -177,13 +185,13 @@ const Post: React.FC<PostProps> = ({ post }) => {
               <FaBookmark
                 size={21}
                 onClick={handleBookmarkToggle}
-                className="ml-4 mt-[2px]"
+                className="ml-4 mt-[2px] cursor-pointer"
               />
             ) : (
               <FaRegBookmark
                 size={21}
                 onClick={handleBookmarkToggle}
-                className="ml-4 mt-[2px]"
+                className="ml-4 mt-[2px] cursor-pointer"
               />
             )}
           </span>
