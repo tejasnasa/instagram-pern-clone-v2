@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { BiMoviePlay } from "react-icons/bi";
-import { CiSearch } from "react-icons/ci";
 import { FaRegHeart } from "react-icons/fa";
 import { FiPlusSquare } from "react-icons/fi";
 import { MdHomeFilled, MdOutlineExplore } from "react-icons/md";
