@@ -48,11 +48,11 @@ const Stories = () => {
   console.log(stories);
 
   return (
-    <main className="bg-black text-white flex">
+    <main className="bg-black text-white flex mt-3 justify-start w-[600px]">
       {stories.map((story) => (
-        <Link to={`/story/${story.id}`} className="">
-          <img src={story.user.avatar} className="h-16 rounded-full" />
-          <h3 className="text-sm">{story.user.username}</h3>
+        <Link to={`/story/${story.id}`} className="flex flex-col items-center m-3">
+          <img src={story.user.avatar} className="h-14 rounded-full" />
+          <h3 className="text-xs">{story.user.username}</h3>
         </Link>
       ))}
     </main>

@@ -57,9 +57,13 @@ const App: React.FC = () => {
   const ShowNavbar = () => {
     const location = useLocation();
     const noNavbarRoutes = ["/login", "/signup"];
+
+    const isStoryRoute = location.pathname.startsWith("/story/");
+
     return (
       isAuthenticated &&
-      !noNavbarRoutes.includes(location.pathname) && (
+      !noNavbarRoutes.includes(location.pathname) &&
+      !isStoryRoute && (
         <Navbar handleLogout={handleLogout} handleTheme={handleThemeSwitch} />
       )
     );

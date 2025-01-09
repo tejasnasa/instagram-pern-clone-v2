@@ -1,55 +1,49 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Loading from "../components/Loading";
+import Loading from "./Loading";
 
 const CreateStory = () => {
   const [formData, setFormData] = useState({
     caption: "",
-    imageurl: [] as string[],
+    imageurl: "", // Single string for one image URL
   });
-  const [imageFiles, setImageFiles] = useState<File[]>([]);
+  const [imageFile, setImageFile] = useState<File | null>(null);
   const [isUploading, setIsUploading] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = Array.from(e.target.files || []);
-    setImageFiles(files);
+    const file = e.target.files ? e.target.files[0] : null;
+    setImageFile(file);
   };
 
-  const uploadImages = async (files: File[]): Promise<string[]> => {
-    const uploadedUrls: string[] = [];
-    for (const file of files) {
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("upload_preset", "xs7v2usy");
-      const { data } = await axios.post(
-        "https://api.cloudinary.com/v1_1/dvhykaekv/image/upload",
-        formData
-      );
-      uploadedUrls.push(data.secure_url);
-    }
-    return uploadedUrls;
+  const uploadImage = async (file: File): Promise<string> => {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "xs7v2usy");
+    const { data } = await axios.post(
+      "https://api.cloudinary.com/v1_1/dvhykaekv/image/upload",
+      formData
+    );
+    return data.secure_url;
   };
 
   const handleImageUpload = async () => {
-    if (imageFiles.length === 0)
-      return alert("Please select images to upload.");
+    if (!imageFile) return alert("Please select an image to upload.");
     setIsUploading(true);
     try {
-      const uploadedUrls = await uploadImages(imageFiles);
-      setFormData((prev) => ({ ...prev, imageurl: uploadedUrls }));
+      const uploadedUrl = await uploadImage(imageFile);
+      setFormData((prev) => ({ ...prev, imageurl: uploadedUrl }));
     } catch (err) {
-      handleError(err, "Error uploading images.");
+      handleError(err, "Error uploading image.");
     } finally {
       setIsUploading(false);
     }
   };
 
   const handleSubmitStory = async () => {
-    if (formData.imageurl.length === 0)
-      return alert("Please upload images first.");
+    if (!formData.imageurl) return alert("Please upload an image first.");
     setIsLoading(true);
     try {
       await axios.post(
@@ -82,7 +76,6 @@ const CreateStory = () => {
       <input
         type="file"
         accept="image/*"
-        multiple
         onChange={handleImageChange}
         className="mt-4"
       />
@@ -93,17 +86,16 @@ const CreateStory = () => {
           isUploading ? "bg-gray-500" : "bg-blue-500"
         } text-white p-2 mt-4 rounded`}
       >
-        {isUploading ? "Uploading..." : "Upload Images"}
+        {isUploading ? "Uploading..." : "Upload Image"}
       </button>
-      <div className="mt-4 flex flex-wrap gap-4">
-        {formData.imageurl.map((url, index) => (
+      <div className="mt-4">
+        {formData.imageurl && (
           <img
-            key={index}
-            src={url}
-            alt={`Uploaded Preview ${index + 1}`}
+            src={formData.imageurl}
+            alt="Uploaded Preview"
             className="max-w-[200px] max-h-[200px] object-cover rounded"
           />
-        ))}
+        )}
       </div>
       <div className="h-[82px] w-[802px] bg-gray-700 flex justify-center items-center my-8">
         <textarea

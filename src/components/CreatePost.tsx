@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Loading from "../components/Loading";
+import Loading from "./Loading";
 
 const CreatePost = () => {
   const [formData, setFormData] = useState({

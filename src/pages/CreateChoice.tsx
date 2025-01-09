@@ -1,11 +1,9 @@
 import { useState } from "react";
-import CreateStory from "./CreateStory";
-import CreatePost from "./CreatePost";
+import CreateStory from "../components/CreateStory";
+import CreatePost from "../components/CreatePost";
 
 const CreateChoice = () => {
-  const [activeTab, setActiveTab] = useState<"stories" | "posts">(
-      "posts"
-    );
+  const [activeTab, setActiveTab] = useState<"stories" | "posts">("posts");
 
   return (
     <main className="dark:bg-black bg-white dark:text-white text-black flex justify-center w-full ml-[240px] mr-[240px]">
@@ -14,9 +12,7 @@ const CreateChoice = () => {
           <button
             onClick={() => setActiveTab("posts")}
             className={`w-[250px] bg-black ${
-              activeTab === "posts"
-                ? "border-b-[2px] border-white"
-                : undefined
+              activeTab === "posts" ? "border-b-[2px] border-white" : undefined
             }`}
           >
             POST
@@ -24,7 +20,9 @@ const CreateChoice = () => {
           <button
             onClick={() => setActiveTab("stories")}
             className={`w-[250px] bg-black ${
-              activeTab === "stories" ? "border-b-[2px] border-white" : undefined
+              activeTab === "stories"
+                ? "border-b-[2px] border-white"
+                : undefined
             }`}
           >
             STORY
