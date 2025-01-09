@@ -77,7 +77,7 @@ const CreatePost = () => {
   if (isLoading) return <Loading />;
 
   return (
-    <main className="bg-black text-white pl-[250px] pr-48 min-h-dvh w-dvw flex flex-col items-center">
+    <main className="bg-black text-white min-h-dvh flex flex-col items-center">
       <h1 className="text-4xl pt-20 pb-8">CREATE POST</h1>
       <input
         type="file"
