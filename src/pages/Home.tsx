@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import People from "../components/People";
 import Stories from "../components/Stories";
@@ -38,27 +38,18 @@ const HomePage: React.FC = () => {
   console.log(posts);
 
   return (
-    <main className="dark:bg-black bg-white dark:text-white text-black flex ml-[240px] mr-[440px]">
-        <div className="flex flex-col">
-          <Stories />
-
-          <Suspense
-            fallback={
-              <section className="flex flex-wrap flex-col items-center justify-center mt-5 bg-red-600 h-[400px]">
-                <hr className="mt-[300px] h-[1px] bg-gray-200 border-0 dark:bg-gray-700" />
-              </section>
-            }
-          >
-            <section className="flex flex-wrap flex-col items-center justify-center mt-5">
-              {Array.isArray(posts) && posts.length > 0 ? (
-                posts.map((post) => <Post key={post.id} post={post} />)
-              ) : (
-                <p>No posts available.</p>
-              )}
-            </section>
-          </Suspense>
-        </div>
-          <People />
+    <main className="dark:bg-black bg-white dark:text-white text-black flex w-full ml-[240px] mr-0 lg:mr-[440px]">
+      <div className="flex flex-col flex-grow items-center">
+        <Stories />
+        <section className="postcont flex flex-col items-center justify-center mt-5 w-full">
+          {Array.isArray(posts) && posts.length > 0 ? (
+            posts.map((post) => <Post key={post.id} post={post} />)
+          ) : (
+            <p>No posts available.</p>
+          )}
+        </section>
+      </div>
+      <People />
     </main>
   );
 };

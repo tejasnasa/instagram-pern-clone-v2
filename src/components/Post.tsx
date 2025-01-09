@@ -133,7 +133,7 @@ const Post: React.FC<PostProps> = ({ post }) => {
   let i = 1;
 
   return (
-    <div key={post.id} className="mb-5 mt-1">
+    <div key={post.id} className="mb-5 mt-1 max-w-[500px]">
       <Link to={`/profile/${post.user.id}`}>
         <img
           src={post.user.avatar}
@@ -143,12 +143,12 @@ const Post: React.FC<PostProps> = ({ post }) => {
       </Link>
       <Carousel showThumbs={false} showStatus={false}>
         {post.imageurl.map((url) => (
-          <div className="flex">
+          <div className="flex justify-center items-center h-full">
             <img
               src={url}
               key={i++}
               alt="Post"
-              className="max-w-auto mt-auto mb-auto"
+              className="mt-auto mb-auto"
             />
           </div>
         ))}
