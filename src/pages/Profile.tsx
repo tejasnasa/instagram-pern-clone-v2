@@ -114,7 +114,7 @@ const ProfilePage: React.FC = () => {
   const isPrivate = !isSelf && !isFollowing && userProfile.private === true;
 
   return (
-    <main className="bg-black text-white pl-80 pr-48 min-h-dvh w-dvw">
+    <main className="dark:bg-black bg-white dark:text-white text-black pl-80 pr-48 min-h-dvh w-dvw">
       <section className="flex ml-12">
         <img
           src={userProfile.avatar || "default-avatar.png"}
@@ -130,7 +130,7 @@ const ProfilePage: React.FC = () => {
                 onClick={handleFollowToggle}
                 className={`${
                   isFollowing ? "bg-gray-400" : "bg-[#1877F2]"
-                } pt-1 pb-1 pr-5 pl-5 mr-5 rounded-lg text-center justify-center`}
+                } pt-1 pb-1 pr-5 pl-5 mr-5 rounded-lg text-center justify-center text-white`}
               >
                 {isFollowing ? "Unfollow" : "Follow"}
               </button>
@@ -139,13 +139,13 @@ const ProfilePage: React.FC = () => {
               <div>
                 <Link
                   to={"/settings"}
-                  className="bg-[#363636] pt-2 pb-2 pr-4 pl-4 mr-2 rounded-lg text-center text-sm font-semibold justify-center"
+                  className="bg-[#F2F2F2] dark:bg-[#363636] pt-2 pb-2 pr-4 pl-4 mr-2 rounded-lg text-center text-sm font-semibold justify-center"
                 >
                   Edit Profile
                 </Link>
                 <Link
                   to={"/activity"}
-                  className="bg-[#363636] pt-2 pb-2 pr-4 pl-4 mr-4 rounded-lg text-center text-sm font-semibold justify-center"
+                  className="bg-[#F2F2F2] dark:bg-[#363636] pt-2 pb-2 pr-4 pl-4 mr-4 rounded-lg text-center text-sm font-semibold justify-center"
                 >
                   View archive
                 </Link>
@@ -173,14 +173,14 @@ const ProfilePage: React.FC = () => {
       <br />
 
       {isPrivate && (
-        <section className="flex flex-col">
-          <h2>This account is private</h2>
-          <h3> Follow to see their photos and videos</h3>
+        <section className="flex flex-col justify-center items-center">
+          <h2 className="text-sm font-semibold">This account is private</h2>
+          <h3 className="text-gray-500 text-sm"> Follow to see their photos and videos</h3>
           <button
             onClick={handleFollowToggle}
             className={`${
               isFollowing ? "bg-gray-400" : "bg-[#1877F2]"
-            } pt-1 pb-1 pr-5 pl-5 mr-5 rounded-lg text-center justify-center`}
+            } pt-1 pb-1 pr-5 pl-5 mr-5 mt-5 rounded-lg text-center justify-center`}
           >
             Follow
           </button>

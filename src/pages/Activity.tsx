@@ -48,14 +48,14 @@ const Activity = () => {
   }, []);
 
   return (
-    <main className="dark:bg-black bg-white dark:text-white text-black flex justify-center w-full ml-[240px] mr-[240px]">
+    <main className="dark:bg-black bg-white dark:text-white text-black flex justify-center w-full pl-[240px] pr-[240px]">
       <div className="flex flex-col flex-grow items-center border-[1px] dark:border-gray-600">
-        <div className="flex justify-center bg-black text-white w-full h-16 border-[1px] dark:border-gray-600">
+        <div className="flex justify-center w-full h-16 border-[1px] dark:border-gray-600">
           <button
             onClick={() => setActiveTab("bookmarks")}
-            className={`w-[250px] bg-black ${
+            className={`w-[250px] ${
               activeTab === "bookmarks"
-                ? "border-b-[2px] border-white"
+                ? "border-b-[2px] dark:border-white border-black"
                 : undefined
             }`}
           >
@@ -63,10 +63,10 @@ const Activity = () => {
           </button>
           <button
             onClick={() => setActiveTab("likes")}
-            className={`w-[250px] bg-black ${
+            className={`w-[250px]  ${
               activeTab === "likes"
-              ? "border-b-[2px] border-white"
-              : undefined
+                ? "border-b-[2px] dark:border-white border-black"
+                : undefined
             }`}
           >
             LIKES
@@ -78,7 +78,7 @@ const Activity = () => {
               {Array.isArray(bPosts) && bPosts.length > 0 ? (
                 bPosts.map((post) => <Post key={post.id} post={post} />)
               ) : (
-                <Loader />
+                <div className="h-dvh"><Loader /></div>
               )}
             </section>
           </>
@@ -88,7 +88,7 @@ const Activity = () => {
               {Array.isArray(lPosts) && lPosts.length > 0 ? (
                 lPosts.map((post) => <Post key={post.id} post={post} />)
               ) : (
-                <Loader />
+                <div className="h-dvh"><Loader /></div>
               )}
             </section>
           </>

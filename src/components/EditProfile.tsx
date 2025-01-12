@@ -59,25 +59,27 @@ const EditProfile = () => {
   };
 
   return (
-    <main className="dark:bg-black bg-white dark:text-white text-black">
-      <section className="flex flex-col">
-        <h2>EDIT PROFILE</h2>
-        <form onSubmit={handleEditProfile}>
+    <main className="dark:bg-black bg-white dark:text-white text-black w-full px-36">
+      <section className="flex flex-col w-full">
+        <h2 className="text-xl font-bold mb-16">Edit Profile</h2>
+        <form onSubmit={handleEditProfile} className="flex flex-col w-full">
+          <label htmlFor="bio" className="text-lg font-bold">Bio</label>
           <input
             type="text"
             name="bio"
             placeholder="Bio"
             value={formData.bio}
             onChange={handleChange}
-            className="bg-black border-2 border-white border-solid m-2"
+            className="dark:bg-black bg-white dark:text-white text-black border-[1px] border-gray-300 dark:border-gray-600 border-solid my-4 p-3 rounded-xl"
           />
+          <label htmlFor="avatar" className="text-lg font-bold mt-8">Change Photo</label>
           <input
             type="text"
             name="avatar"
             placeholder="Avatar"
             value={formData.avatar}
             onChange={handleChange}
-            className="bg-black border-2 border-white border-solid m-2"
+            className="dark:bg-black bg-white dark:text-white text-black border-[1px] border-gray-300 dark:border-gray-600 border-solid my-4 p-3 rounded-xl"
           />
           <label className="m-2">
             <input
@@ -91,9 +93,9 @@ const EditProfile = () => {
           </label>
           <button
             type="submit"
-            className="w-80 p-auto text-center bg-blue-600 m-1 rounded-md p-1 align-middle"
+            className="w-72 p-auto text-center bg-blue-600 text-white m-1 rounded-md p-1 align-middle h-10 font-semibold self-end"
           >
-            Update Profile
+            Submit
           </button>
         </form>
       </section>

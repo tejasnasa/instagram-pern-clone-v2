@@ -59,8 +59,8 @@ const Comments = ({ comments, postid, refreshPost }: CommentsProps) => {
   };
 
   return (
-    <section className="bg-white dark:bg-black text-black dark:text-white flex flex-col max-h-dvh overflow-hidden p-6 w-[400px] ml-10">
-      <div className="flex-grow overflow-y-auto w-[400px]">
+    <section className="bg-white dark:bg-black text-black dark:text-white flex flex-col max-h-dvh overflow-hidden p-6 w-[460px] ml-10">
+      <div className="flex-grow overflow-y-auto w-[400px] border-l-[1px] dark:border-l-gray-800 border-l-gray-300 pl-6">
         {comments.map((comment) => (
           <div key={comment.id} className="mb-4">
             <div className="flex text-sm items-center">
@@ -76,7 +76,7 @@ const Comments = ({ comments, postid, refreshPost }: CommentsProps) => {
                   </Link>
                 </span>&nbsp;
                 <span>{comment.text}</span>
-                <div className="text-xs text-gray-300 mt-2">{comment.likes.length} likes&nbsp;&nbsp; Reply</div>
+                <div className="text-xs dark:text-gray-300 text-gray-600 mt-2">{comment.likes.length} likes&nbsp;&nbsp; Reply</div>
               </div>
             </div>
 
@@ -85,17 +85,17 @@ const Comments = ({ comments, postid, refreshPost }: CommentsProps) => {
         ))}
       </div>
 
-      <form onSubmit={handleComment} className="mt-4 flex w-[400px]">
+      <form onSubmit={handleComment} className="mt-4 flex w-[460px] ml-4">
         <input
           type="text"
           value={formData.text}
           name="text"
           onChange={handleChange}
-          className="bg-black border-gray-500 border-2 p-2 text-sm w-3/4"
+          className="dark:bg-black bg-gray-50 dark:border-gray-500 border-2 p-2 text-sm w-3/4"
         />
         <button
           type="submit"
-          className=" bg-black text-blue-600 w-1/4"
+          className=" dark:bg-black bg-white text-blue-600 w-1/4"
         >
           Post
         </button>

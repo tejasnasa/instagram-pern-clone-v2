@@ -50,17 +50,17 @@ const PasswordChange = () => {
   };
 
   return (
-    <main className="dark:bg-black bg-white dark:text-white text-black">
-      <section className="flex flex-col">
-        <h2>CHANGE PASSWORD</h2>
-        <form onSubmit={handlePasswordChange}>
+    <main className="dark:bg-black bg-white dark:text-white text-black w-full px-36">
+      <section className="flex flex-col w-full">
+      <h2 className="text-xl font-bold mb-16">Change Password</h2>
+        <form onSubmit={handlePasswordChange} className="flex flex-col w-full">
           <input
             type="text"
             name="oldPassword"
             placeholder="Old Password"
             value={formData.oldPassword}
             onChange={handleChange}
-            className="bg-black border-2 border-white border-solid m-2"
+            className="dark:bg-black bg-white dark:text-white text-black border-[1px] border-gray-300 dark:border-gray-600 border-solid my-4 p-3 rounded-xl"
           />
           <input
             type="text"
@@ -68,7 +68,7 @@ const PasswordChange = () => {
             placeholder="New Password"
             value={formData.newPassword1}
             onChange={handleChange}
-            className="bg-black border-2 border-white border-solid m-2"
+            className="dark:bg-black bg-white dark:text-white text-black border-[1px] border-gray-300 dark:border-gray-600 border-solid my-4 p-3 rounded-xl"
           />
           <input
             type="text"
@@ -76,13 +76,13 @@ const PasswordChange = () => {
             placeholder="New Password"
             value={formData.newPassword2}
             onChange={handleChange}
-            className="bg-black border-2 border-white border-solid m-2"
+            className="dark:bg-black bg-white dark:text-white text-black border-[1px] border-gray-300 dark:border-gray-600 border-solid my-4 p-3 rounded-xl"
           />
           <button
             type="submit"
-            className="w-80 p-auto text-center bg-blue-600 m-1 rounded-md p-1 align-middle"
+            className="w-72 p-auto text-center bg-blue-600 text-white m-1 mt-4 rounded-md p-1 align-middle h-10 font-semibold self-end"
           >
-            Login
+            Submit
           </button>
         </form>
         <div className="h-[20px] m-1 p-2">

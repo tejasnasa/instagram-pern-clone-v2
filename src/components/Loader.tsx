@@ -4,22 +4,10 @@ const Loader= () => {
       style={{
         display: "flex",
         justifyContent: "center",
-        alignItems: "center",
         zIndex: 9999,
-        flexDirection: "column",
       }}
-      className="dark:bg-black bg-white dark:text-white text-black"
-    >
-      <div
-        style={{
-          width: "25px",
-          height: "25px",
-          border: "3px solid rgba(255, 255, 255, 0.2)",
-          borderTop: "3px solid white",
-          borderRadius: "50%",
-          animation: "spin 1s linear infinite",
-        }}
-      />
+      className="dark:bg-black bg-white dark:text-white text-black w-full h-full"
+    ><div className="w-[25px] h-[25px] border-[3px] dark:border-white/30 border-black/30 border-t-[3px] dark:border-t-white border-t-black rounded-[50%] animate-spin "/>
       <style>
         {`
           @keyframes spin {

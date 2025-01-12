@@ -20,6 +20,7 @@ interface Post {
   likes: any[];
   comments: any[];
   bookmarks: any[];
+  created_at: string;
 }
 
 const PostDetails: React.FC = () => {
@@ -61,7 +62,9 @@ const PostDetails: React.FC = () => {
 
   if (loading) {
     return (
-      <Loader/>
+      <div className="flex justify-center w-dvw pt-10">
+        <Loader />
+      </div>
     );
   }
 
@@ -70,14 +73,14 @@ const PostDetails: React.FC = () => {
   }
 
   return (
-      <main className="bg-black text-white ml-[240px] min-h-dvh w-dvw flex px-32">
-        <Post key={post!.id} post={post!} />
-        <Comments
-          comments={post!.comments}
-          postid={post!.id}
-          refreshPost={fetchPostDetails}
-        />
-      </main>
+    <main className="dark:bg-black bg-white dark:text-white text-black ml-[240px] min-h-dvh w-dvw flex px-32">
+      <Post key={post!.id} post={post!} />
+      <Comments
+        comments={post!.comments}
+        postid={post!.id}
+        refreshPost={fetchPostDetails}
+      />
+    </main>
   );
 };
 

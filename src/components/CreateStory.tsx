@@ -71,7 +71,7 @@ const CreateStory = () => {
   if (isLoading) return <Loading />;
 
   return (
-    <main className="bg-black text-white min-h-dvh flex flex-col items-center">
+    <main className="dark:bg-black bg-white dark:text-white text-black min-h-dvh flex flex-col items-center">
       <h1 className="text-4xl pt-20 pb-8">CREATE STORY</h1>
       <input
         type="file"
@@ -105,7 +105,7 @@ const CreateStory = () => {
           onChange={(e) =>
             setFormData({ ...formData, caption: e.target.value })
           }
-          className="bg-black border border-white h-20 w-[800px] resize-none p-3"
+          className="dark:bg-black bg-white dark:text-white text-black border border-white h-20 w-[800px] resize-none p-3"
         />
       </div>
       <button

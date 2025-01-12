@@ -77,7 +77,7 @@ const Search: React.FC = () => {
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center m-3 text-md font-medium w-[90%] transition ease-in-out hover:bg-[#F2F2F2] dark:hover:bg-[#1A1A1A] rounded-lg"
-      >
+      > 
         <CiSearch size={30} className="m-2 mr-4" />
         Search
       </button>

@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import NotFoundPage from "./NotFound";
 import { RxCross2 } from "react-icons/rx";
+import Loader from "../components/Loader";
 
 interface Story {
   id: string;
@@ -19,6 +20,8 @@ interface Story {
 const ViewStories = () => {
   const { storyid } = useParams<{ storyid: string }>();
   const [story, setStory] = useState<Story | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+    const [notFound, setNotFound] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchPostDetails = async () => {
@@ -33,25 +36,37 @@ const ViewStories = () => {
         );
         const storyData = response.data.responseObject;
         setStory(storyData);
+        setNotFound(false);
       } catch (err) {
         console.error("Error fetching post details:", err);
+        setNotFound(true);
+      }finally {
+        setLoading(false);
       }
     };
     fetchPostDetails();
   }, [storyid]);
 
-  if (!story) {
+  if (loading) {
+    return (
+      <div className="flex justify-center w-dvw pt-10">
+        <Loader />
+      </div>
+    );
+  }
+
+  if (notFound) {
     return <NotFoundPage />;
   }
 
   return (
     <main className="bg-[#1A1A1A] text-white h-dvh w-dvw flex justify-center items-center">
       <section className="flex h-[95%] w-[27%] bg-black">
-        <Link to={`/profile/${story.user.id}`} className="fixed flex items-center m-2">
-          <img src={story.user.avatar} className="h-10 rounded-full m-2" />
-          <span className="text-sm">{story.user.username}</span>
+        <Link to={`/profile/${story!.user.id}`} className="fixed flex items-center m-2">
+          <img src={story!.user.avatar} className="h-10 rounded-full m-2" />
+          <span className="text-sm">{story!.user.username}</span>
         </Link>
-        <img src={story.imageurl} alt="" className="object-contain" />
+        <img src={story!.imageurl} alt="" className="object-contain" />
       </section>
       {/* <div className="flex">
         <img src={story.user.avatar} className="h-16 rounded-full" />

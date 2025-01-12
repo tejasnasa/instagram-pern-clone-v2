@@ -35,7 +35,7 @@ const Stories = () => {
             setStories(response.data.responseObject);
           } catch (err) {
             console.error("Error fetching posts:", err);
-          } 
+          }
         }, 1000);
       } catch (err) {
         console.error("Error fetching posts:", err);
@@ -50,7 +50,10 @@ const Stories = () => {
   return (
     <main className="dark:bg-black bg-white dark:text-white text-black flex mt-3 justify-start w-[600px]">
       {stories.map((story) => (
-        <Link to={`/story/${story.id}`} className="flex flex-col items-center m-3">
+        <Link
+          to={`/story/${story.id}`}
+          className="flex flex-col items-center m-3"
+        >
           <img src={story.user.avatar} className="h-14 rounded-full" />
           <h3 className="text-xs">{story.user.username}</h3>
         </Link>

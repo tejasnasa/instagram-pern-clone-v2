@@ -38,7 +38,7 @@ const HomePage: React.FC = () => {
           {Array.isArray(posts) && posts.length > 0 ? (
             posts.map((post) => <Post key={post.id} post={post} />)
           ) : (
-            <Loader />
+            <div className="h-dvh"><Loader /></div>
           )}
         </section>
       </div>

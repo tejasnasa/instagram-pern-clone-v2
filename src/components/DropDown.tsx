@@ -39,7 +39,7 @@ const UpsideDropdown: React.FC<DropdownProps> = ({
     >
       <button
         onClick={toggleDropdown}
-        className="flex items-center m-3 text-md font-medium transition ease-in-out hover:bg-[#1A1A1A] rounded-lg w-[90%]"
+        className="flex items-center m-3 text-md font-medium transition ease-in-out dark:hover:bg-[#1A1A1A] hover:bg-[#F2F2F2] rounded-lg w-[90%]"
       >
         <RxHamburgerMenu size={25} className="m-2 mr-4" />
         More
@@ -50,25 +50,28 @@ const UpsideDropdown: React.FC<DropdownProps> = ({
           <div className="flex flex-col text-sm">
             <Link
               to={"/settings"}
-              className="flex items-center p-2 text-md font-medium transition ease-in-out hover:bg-[#1A1A1A]"
+              className="flex items-center p-2 text-md font-medium transition ease-in-out dark:hover:bg-[#1A1A1A] hover:bg-[#F2F2F2]"
             >
               <RiSettings5Fill size={23} className="m-2 mr-4" />
               Settings
             </Link>
             <button
-              className="flex items-center p-2 text-md font-medium transition ease-in-out hover:bg-[#1A1A1A]"
+              className="flex items-center p-2 text-md font-medium transition ease-in-out dark:hover:bg-[#1A1A1A] hover:bg-[#F2F2F2]"
               onClick={handleTheme}
             >
               <GoMoon size={23} className="m-2 mr-4" />
               Switch appearance
             </button>
-            <Link to={"/activity"} className="flex items-center p-2 text-md font-medium transition ease-in-out hover:bg-[#1A1A1A]">
+            <Link
+              to={"/activity"}
+              className="flex items-center p-2 text-md font-medium transition ease-in-out dark:hover:bg-[#1A1A1A] hover:bg-[#F2F2F2]"
+            >
               <CiBookmark size={23} className="m-2 mr-4" />
               Saved
             </Link>
             <hr className="my-1 border-t-[1px] dark:border-gray-600" />
             <button
-              className="flex items-center p-3 pl-5 text-md font-medium transition ease-in-out hover:bg-[#1A1A1A]"
+              className="flex items-center p-3 pl-5 text-md font-medium transition ease-in-out dark:hover:bg-[#1A1A1A] hover:bg-[#F2F2F2]"
               onClick={handleLogout}
             >
               Logout

@@ -15,29 +15,7 @@ const Loading = () => {
       }}
       className="dark:bg-black bg-white dark:text-white text-black"
     >
-      <div className="w-[50px] h-[50px] border-[5px] dark:border-white/30 border-black/30 border-t-[5px] dark:border-t-white border-t-black rounded-[50%] animate-spin "
-        style={{
-          width: "50px",
-          height: "50px",
-          border: "5px solid rgba(255, 255, 255, 0.3)",
-          borderTop: "5px solid white",
-          borderRadius: "50%",
-          animation: "spin 1s linear infinite",
-        }}
-      />
-      <h1 style={{ marginTop: "20px" }}>Loading...</h1>
-      <style>
-        {`
-          @keyframes spin {
-            0% {
-              transform: rotate(0deg);
-            }
-            100% {
-              transform: rotate(360deg);
-            }
-          }
-        `}
-      </style>
+      <img src="/images/iglogo.png" alt="" className="h-20"/>
     </div>
   );
 };
