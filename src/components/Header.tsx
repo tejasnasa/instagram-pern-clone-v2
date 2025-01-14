@@ -8,7 +8,10 @@ const Header: React.FC = () => {
 
   switch (location.pathname) {
     case "/":
-      title = "Instagram";
+      title = "Home";
+      break;
+    case "/explore":
+      title = "Explore";
       break;
     case "/login":
       title = "Login - Instagram";
@@ -23,23 +26,23 @@ const Header: React.FC = () => {
       title = "Post";
       break;
     case "/create":
-      title = "Create Post";
+      title = "Create";
       break;
-    case "/people":
-      title = "People";
+    case "/settings":
+      title = "Settings";
+      break;
+    case "/activity":
+      title = "Activity";
       break;
     default:
-      title = "Page Not Found";
+      title = "Instagram";
   }
 
   React.useEffect(() => {
     document.title = title;
   }, [location.pathname]);
 
-  return (
-    <header className="bg-black text-white">
-    </header>
-  );
+  return <header className="bg-black text-white"></header>;
 };
 
 export default Header;

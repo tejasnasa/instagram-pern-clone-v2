@@ -47,6 +47,12 @@ const ViewStories = () => {
     fetchPostDetails();
   }, [storyid]);
 
+  useEffect(() => {
+      if (story) {
+        document.title = `${story.user.username} - Stories`;
+      }
+    }, [story]);
+
   if (loading) {
     return (
       <div className="flex justify-center w-dvw pt-10">
