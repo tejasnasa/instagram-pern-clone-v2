@@ -45,8 +45,6 @@ const Stories = () => {
     fetchPosts();
   }, []);
 
-  console.log(stories);
-
   return (
     <main className="dark:bg-black bg-white dark:text-white text-black flex mt-3 justify-start w-[600px]">
       {stories.map((story) => (

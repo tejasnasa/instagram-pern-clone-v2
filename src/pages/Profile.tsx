@@ -54,7 +54,6 @@ const ProfilePage: React.FC = () => {
         );
         const profile = response.data.responseObject;
         setUserProfile(profile);
-        console.log(profile);
 
         const isUserFollowing = profile.followers.some(
           (follower: any) => follower.followerid === loggedInUserId

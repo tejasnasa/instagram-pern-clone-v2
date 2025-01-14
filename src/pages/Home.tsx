@@ -28,8 +28,6 @@ const HomePage: React.FC = () => {
     fetchPosts();
   }, []);
 
-  console.log(posts);
-
   return (
     <main className="dark:bg-black bg-white dark:text-white text-black flex w-screen pl-[240px] mr-0 lg:pr-[400px]">
       <div className="flex flex-col flex-grow items-center">

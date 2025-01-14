@@ -49,9 +49,6 @@ const Comments = ({ comments, postid, refreshPost }: CommentsProps) => {
         refreshPost();
       }
 
-      console.log(response.data.responseObject);
-      console.log(comments);
-
       setFormData({ text: "" });
     } catch (err) {
       console.error("Error during login:", err);
