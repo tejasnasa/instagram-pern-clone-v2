@@ -60,7 +60,6 @@ const Search: React.FC = () => {
         );
         const fetchedResults = response.data.responseObject;
         setResults(fetchedResults || []);
-
       } catch (error) {
         console.error("Error fetching search results:", error);
       } finally {
@@ -77,7 +76,7 @@ const Search: React.FC = () => {
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center m-3 text-md font-medium w-[90%] transition ease-in-out hover:bg-[#F2F2F2] dark:hover:bg-[#1A1A1A] rounded-lg"
-      > 
+      >
         <CiSearch size={30} className="m-2 mr-4" />
         Search
       </button>
@@ -98,13 +97,13 @@ const Search: React.FC = () => {
         />
 
         {loading && (
-          <p>
+          <div>
             <Loader />
-          </p>
+          </div>
         )}
 
         <div>
-          {results.length !== 0 && query !== ""  ? (
+          {results.length !== 0 && query !== "" ? (
             results.map((result) => (
               <Link
                 key={result.id}

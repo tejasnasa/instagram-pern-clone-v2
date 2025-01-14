@@ -62,7 +62,7 @@ const PostDetails: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="flex justify-center w-dvw pt-10">
+      <div className="flex justify-center w-dvw bg-white dark:bg-black pt-8 h-dvh ml-[240px] pr-[240px]">
         <Loader />
       </div>
     );
