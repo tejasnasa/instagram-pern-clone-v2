@@ -76,20 +76,23 @@ const LoginPage: React.FC<LoginPageProps> = ({ setAuth }) => {
               onChange={handleChange}
               className="bg-black border-gray-500 border-2 p-2 w-80 text-sm m-1"
             />
-            <input
-              type={showPassword ? "text" : "password"}
-              name="password"
-              placeholder="Password"
-              value={formData.password}
-              onChange={handleChange}
-              className="bg-black border-gray-500 border-2 p-2 w-80 text-sm m-1"
-            />
-            <span
-              className="flex justify-around items-center absolute mr-10"
-              onClick={handlePasswordToggle}
-            >
-              SHOW
-            </span>
+            <div className="relative flex items-center">
+              <input
+                type={showPassword ? "text" : "password"}
+                name="password"
+                placeholder="Password"
+                value={formData.password}
+                onChange={handleChange}
+                className="bg-black border-gray-500 border-2 p-2 w-80 text-sm m-1 pr-10"
+              />
+              <button
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-xs text-white"
+                onClick={handlePasswordToggle}
+              >
+                SHOW
+              </button>
+            </div>
+
             <button
               type="submit"
               className="w-80 p-auto text-center bg-blue-600 m-1 rounded-md p-1 align-middle"
