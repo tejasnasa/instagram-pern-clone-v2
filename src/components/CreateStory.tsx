@@ -5,8 +5,7 @@ import Loading from "../pages/Loading";
 
 const CreateStory = () => {
   const [formData, setFormData] = useState({
-    caption: "",
-    imageurl: "", // Single string for one image URL
+    imageurl: "",
   });
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [isUploading, setIsUploading] = useState(false);
@@ -96,17 +95,6 @@ const CreateStory = () => {
             className="max-w-[200px] max-h-[200px] object-cover rounded"
           />
         )}
-      </div>
-      <div className="h-[82px] w-[802px] bg-gray-700 flex justify-center items-center my-8">
-        <textarea
-          name="caption"
-          placeholder="Write a caption..."
-          value={formData.caption}
-          onChange={(e) =>
-            setFormData({ ...formData, caption: e.target.value })
-          }
-          className="dark:bg-black bg-white dark:text-white text-black border border-white h-20 w-[800px] resize-none p-3"
-        />
       </div>
       <button
         onClick={handleSubmitStory}
