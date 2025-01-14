@@ -60,7 +60,7 @@ const People: React.FC = () => {
       <div>
         {loggedInUser?.avatar && (
           <Link
-            to={`profile/${loggedInUser.id}`}
+            to={`/profile/${loggedInUser.id}`}
             className="flex items-center mt-8 text-md font-medium"
           >
             <img

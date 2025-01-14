@@ -4,6 +4,8 @@ import { Link, useParams } from "react-router-dom";
 import { SlOptions } from "react-icons/sl";
 import { FaHeart } from "react-icons/fa";
 import { BiSolidMessageRounded } from "react-icons/bi";
+import Loader from "../components/Loader";
+import NotFoundPage from "./NotFound";
 
 interface UserProfile {
   id: string;
@@ -22,6 +24,8 @@ const ProfilePage: React.FC = () => {
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
   const [loggedInUserId, setLoggedInUserId] = useState<string | null>(null);
   const [isFollowing, setIsFollowing] = useState(false);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [notFound, setNotFound] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchLoggedInUserId = async () => {
@@ -58,10 +62,15 @@ const ProfilePage: React.FC = () => {
         const isUserFollowing = profile.followers.some(
           (follower: any) => follower.followerid === loggedInUserId
         );
+
         setIsFollowing(isUserFollowing);
+        setNotFound(false);
       } catch (err) {
         console.error("Error fetching user data:", err);
-      } 
+        setNotFound(true);
+      } finally {
+        setLoading(false);
+      }
     };
 
     const initialize = async () => {
@@ -104,26 +113,34 @@ const ProfilePage: React.FC = () => {
     }
   }, [userProfile]);
 
-  if (!userProfile || !loggedInUserId) {
-    return <div>No profile found.</div>;
+  if (loading) {
+    return (
+      <div className="flex justify-center w-dvw bg-white dark:bg-black pt-8 h-dvh ml-[240px] pr-[240px]">
+        <Loader />
+      </div>
+    );
   }
 
-  const isSelf = loggedInUserId === userProfile.id;
+  if (notFound) {
+    return <NotFoundPage />;
+  }
 
-  const isPrivate = !isSelf && !isFollowing && userProfile.private === true;
+  const isSelf = loggedInUserId === userProfile!.id;
+
+  const isPrivate = !isSelf && !isFollowing && userProfile!.private === true;
 
   return (
     <main className="dark:bg-black bg-white dark:text-white text-black pl-80 pr-48 min-h-dvh w-dvw">
       <section className="flex ml-12">
         <img
-          src={userProfile.avatar || "default-avatar.png"}
+          src={userProfile!.avatar || "default-avatar.png"}
           alt="Avatar"
           className="h-40 rounded-full m-12"
         />
 
         <div className="m-10 ml-16">
           <div className="flex mb-6 items-center">
-            <h1 className="text-xl mr-5">{userProfile.username}</h1>
+            <h1 className="text-xl mr-5">{userProfile!.username}</h1>
             {!isSelf && (
               <button
                 onClick={handleFollowToggle}
@@ -153,17 +170,17 @@ const ProfilePage: React.FC = () => {
             <SlOptions />
           </div>
           <div className="mb-6">
-            <span className="m-4 ml-0">{userProfile.posts.length} posts</span>
+            <span className="m-4 ml-0">{userProfile!.posts.length} posts</span>
             <span className="m-4">
-              {userProfile.followers.length} followers
+              {userProfile!.followers.length} followers
             </span>
             <span className="m-4">
-              {userProfile.following.length} following
+              {userProfile!.following.length} following
             </span>
           </div>
           <div>
-            <h5 className="text-sm font-semibold">{userProfile.fullname}</h5>
-            <p className="text-sm">{userProfile.bio}</p>
+            <h5 className="text-sm font-semibold">{userProfile!.fullname}</h5>
+            <p className="text-sm">{userProfile!.bio}</p>
           </div>
         </div>
       </section>
@@ -174,7 +191,10 @@ const ProfilePage: React.FC = () => {
       {isPrivate && (
         <section className="flex flex-col justify-center items-center">
           <h2 className="text-sm font-semibold">This account is private</h2>
-          <h3 className="text-gray-500 text-sm"> Follow to see their photos and videos</h3>
+          <h3 className="text-gray-500 text-sm">
+            {" "}
+            Follow to see their photos and videos
+          </h3>
           <button
             onClick={handleFollowToggle}
             className={`${
@@ -189,8 +209,8 @@ const ProfilePage: React.FC = () => {
       {!isPrivate && (
         <section>
           <div className="grid grid-cols-3 gap-1">
-            {userProfile.posts.length > 0 ? (
-              userProfile.posts.map((post) => (
+            {userProfile!.posts.length > 0 ? (
+              userProfile!.posts.map((post) => (
                 <Link
                   key={post.id}
                   to={`/post/${post.id}`}
