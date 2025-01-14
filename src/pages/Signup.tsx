@@ -78,6 +78,13 @@ const SignUpPage: React.FC<SignUpPageProps> = ({ setAuth }) => {
       <section className="flex flex-col mt-24">
         <div className="flex flex-col items-center border-gray-600 border-2 p-8">
           <img src="images/login2.png" alt="instagram" className="w-60" />
+          <div className="text-red-500 bg-red-950 w-80 p-2 mb-2 flex flex-col items-center text-center">
+            <p className="text-yellow-300">! DATA ALREADY IMPORTED !</p>
+            <p className="text-xs">
+              IF YOU HAVE SIGNED UP BEFORE, YOU DO NOT HAVE TO SIGNUP AGAIN. USE
+              YOUR EXISTING CREDENTIALS, OR USE DIFFERENT EMAIL FOR SIGNUP.
+            </p>
+          </div>
           <h2 className="text-gray-400 font-semibold">
             Sign up to see photos and videos
           </h2>

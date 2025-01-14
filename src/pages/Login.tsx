@@ -67,6 +67,14 @@ const LoginPage: React.FC<LoginPageProps> = ({ setAuth }) => {
             alt="instagram"
             className="h-36 w-fit pb-10 mt-5"
           />
+          <div className="text-red-500 bg-red-950 w-80 p-2 mb-2">
+            <p className="text-yellow-300">! DATA ALREADY IMPORTED !</p>
+            <p className="text-xs">
+              IF YOU HAVE SIGNED UP BEFORE, YOU DO NOT HAVE TO SIGNUP AGAIN. USE
+              YOUR EXISTING CREDENTIALS, OR USE DIFFERENT EMAIL FOR SIGNUP.
+            </p>
+          </div>
+
           <form onSubmit={handleLogin} className="flex flex-col">
             <input
               type="text"
