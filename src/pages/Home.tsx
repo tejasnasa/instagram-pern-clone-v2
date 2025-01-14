@@ -7,10 +7,12 @@ import Loader from "../components/Loader";
 
 const HomePage: React.FC = () => {
   const [posts, setPosts] = useState<any[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
+        setLoading(true);
         const response = await axios.get(
           `${import.meta.env.VITE_BASE_URL}/v1/posts/viewMy`,
           {
@@ -22,6 +24,8 @@ const HomePage: React.FC = () => {
         setPosts(response.data.responseObject);
       } catch (err) {
         console.error("Error fetching posts:", err);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -33,10 +37,16 @@ const HomePage: React.FC = () => {
       <div className="flex flex-col flex-grow items-center">
         <Stories />
         <section className="flex flex-col items-center justify-center mt-5 w-full">
-          {Array.isArray(posts) && posts.length > 0 ? (
+          {loading ? (
+            <div className="h-dvh">
+              <Loader />
+            </div>
+          ) : Array.isArray(posts) && posts.length > 0 ? (
             posts.map((post) => <Post key={post.id} post={post} />)
           ) : (
-            <div className="h-dvh"><Loader /></div>
+            <div className="text-gray-500 dark:text-gray-400">
+              Follow people to see posts
+            </div>
           )}
         </section>
       </div>
